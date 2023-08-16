@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Document.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">アプリケーションドキュメンテーション</h1>
+<ul>
+<li><a href="#%E3%83%87%E3%83%A2%E3%81%AE%E6%89%8B%E9%A0%86">デモの手順</a></li>
+<li><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E6%A6%82%E8%A6%81%E8%AA%AC%E6%98%8E">ソースコードの概要説明</a>
+<ul>
+<li><a href="#1-indexhtmlweb%E3%83%9A%E3%83%BC%E3%82%B8%E7%94%A8">1. <code>index.html</code>(Webページ用)</a></li>
+<li><a href="#2-activity_mainxmlsrcmainreslayout">2. <code>activity_main.xml</code>(src/main/res/layout)</a></li>
+<li><a href="#3-bottom_nav_menu_mainxml%E3%81%A8bottom_nav_menu_file_listxmlsrcmainresmenu">3. <code>bottom_nav_menu_main.xmlとbottom_nav_menu_file_list.xml</code>(src/main/res/menu)</a></li>
+<li><a href="#4-fragment_settingsxmlsrcmainreslayout">4. <code>fragment_settings.xml</code>(src/main/res/layout)</a></li>
+<li><a href="#5-mainactivityjavasrcmainjavacomexampleapp">5. <code>MainActivity.java</code>(src/main/java/com/example/app)</a></li>
+<li><a href="#6-settingsfragmentjavasrcmainjavacomexampleapp">6. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</a></li>
+<li><a href="#7-androidmanifestxmlsrcmainres">7. <code>AndroidManifest.xml</code>(src/main/res)</a></li>
+<li><a href="#8-youtubehtml%E3%81%A8example_comhtmlsrcmainassets">8. <code>YouTube.html</code>と<code>example_com.html</code>(src/main/assets)</a></li>
+<li><a href="#9-filelistactivityjavasrcmainjavacomexampleapp">9. <code>FileListActivity.java</code>(src/main/java/com/example/app)</a></li>
+<li><a href="#10-settingsfragmentjavasrcmainjavacomexampleapp">10. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</a></li>
+<li><a href="#11-activity_file_listxmlsrcmainreslayout">11. <code>activity_file_list.xml</code>(src/main/res/layout)</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E">ソースコードの詳細説明</a>
+<ul>
+<li><a href="#1-indexhtml">1. <code>index.html</code></a>
+<ul>
+<li><a href="#%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ヘッダー部分</a></li>
+<li><a href="#css%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%82%B7%E3%83%BC%E3%83%88">CSSスタイルシート</a></li>
+<li><a href="#%E6%9C%AC%E6%96%87%E3%81%A8%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%AA%E3%83%B3%E3%82%AF">本文とディープリンク</a></li>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%83%90%E3%83%8A%E3%83%BC">アプリインストールバナー</a></li>
+<li><a href="#javascript%E3%82%B3%E3%83%BC%E3%83%89">JavaScriptコード</a></li>
+</ul>
+</li>
+<li><a href="#2-activity_mainxml">2. <code>activity_main.xml</code></a>
+<ul>
+<li><a href="#%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">ヘッダーコンテナ</a>
+<ul>
+<li><a href="#%E6%88%BB%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3">戻るボタン</a></li>
+<li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%90%8D%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86">カテゴリ名表示部分</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86">パラメータ表示部分</a></li>
+<li><a href="#%E3%83%95%E3%83%A9%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E8%A1%A8%E7%A4%BA%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">フラグメント表示コンテナ</a></li>
+<li><a href="#webview%E9%83%A8%E5%88%86">WebView部分</a></li>
+<li><a href="#%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%83%A8%E5%88%86">ボトムナビゲーション部分</a></li>
+</ul>
+</li>
+<li><a href="#3-bottom_nav_menu_mainxml">3. <code>bottom_nav_menu_main.xml</code></a>
+<ul>
+<li><a href="#%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0-%E3%83%93%E3%83%A5%E3%83%BC%E3%82%A2">メニューアイテム: ビューア</a></li>
+<li><a href="#%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0-%E8%A8%AD%E5%AE%9A">メニューアイテム: 設定</a></li>
+</ul>
+</li>
+<li><a href="#4-fragment_settingsxml">4. <code>fragment_settings.xml</code></a>
+<ul>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E8%A6%81%E7%B4%A0-linearlayout">ルート要素: <code>LinearLayout</code></a></li>
+<li><a href="#%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%93%E3%83%A5%E3%83%BC-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E6%83%85%E5%A0%B1">テキストビュー: バージョン情報</a></li>
+<li><a href="#%E3%82%A8%E3%83%87%E3%82%A3%E3%83%83%E3%83%88%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%85%A5%E5%8A%9B">エディットテキスト: フリーテキスト入力</a></li>
+</ul>
+</li>
+<li><a href="#5-mainactivityjava">5. <code>MainActivity.java</code></a>
+<ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</a></li>
+<li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0">インスタンス変数</a></li>
+<li><a href="#oncreate%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreate</code>メソッド</a>
+<ul>
+<li><a href="#51-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E5%88%9D%E6%9C%9F%E5%8C%96">5.1. 基本的な初期化</a></li>
+<li><a href="#52-webview%E3%81%AE%E8%A8%AD%E5%AE%9A">5.2. WebViewの設定</a></li>
+<li><a href="#53-%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%81%A8%E5%8B%95%E7%94%BB%E5%90%8D%E3%81%AE%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.3. カテゴリと動画名の表示部分の初期化</a></li>
+<li><a href="#54-intent%E3%81%8B%E3%82%89%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%96%E5%BE%97">5.4. Intentからのデータ取得</a></li>
+<li><a href="#55-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.5. ボトムナビゲーションの初期化</a></li>
+<li><a href="#56-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%AE%E6%BA%96%E5%82%99">5.6. シャットダウンの準備</a></li>
+<li><a href="#57-%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86%E3%81%AE%E8%A8%AD%E5%AE%9A">5.7. ヘッダー部分の設定</a></li>
+<li><a href="#58-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC">5.8. ボトムナビゲーションのイベントリスナー</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">アクティビティのライフサイクルメソッド</a>
+<ul>
+<li><a href="#510-onpause">5.10. <code>onPause()</code></a></li>
+<li><a href="#511-onresume">5.11. <code>onResume()</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#6-settingsfragment">6. <code>SettingsFragment</code></a>
+<ul>
+<li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E6%A6%82%E8%A6%81">クラスの概要</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF">コンストラクタ</a></li>
+<li><a href="#oncreateview-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreateView</code> メソッド</a></li>
+</ul>
+</li>
+<li><a href="#7-activity_file_listxml">7. <code>activity_file_list.xml</code></a>
+<ul>
+<li><a href="#%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86-1">ヘッダー部分</a></li>
+<li><a href="#%E5%8B%95%E7%94%BB%E3%83%9C%E3%82%BF%E3%83%B3%E9%83%A8%E5%88%86">動画ボタン部分</a></li>
+<li><a href="#%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E7%94%A8%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">設定画面表示用のコンテナ</a></li>
+<li><a href="#%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%83%A8%E5%88%86-1">ボトムナビゲーション部分</a></li>
+</ul>
+</li>
+<li><a href="#8-youtubehtml-%E3%81%A8-example_comhtml">8. <code>YouTube.html と example_com.html</code></a>
+<ul>
+<li><a href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E5%AE%A3%E8%A8%80%E3%81%A8%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ドキュメントの宣言とヘッダー部分</a></li>
+<li><a href="#%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%AE%E5%AE%9A%E7%BE%A9">スタイルの定義</a></li>
+<li><a href="#%E6%9C%AC%E6%96%87%E3%81%A8%E5%8B%95%E7%94%BB%E3%81%AE%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF">本文と動画の埋め込み</a></li>
+<li><a href="#example_comhtml%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><code>example_com.html</code>について</a></li>
+</ul>
+</li>
+<li><a href="#9-filelistactivityjava">9. <code>FileListActivity.java</code></a>
+<ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80-1">パッケージ宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80-1">インポート宣言</a></li>
+<li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80-1">クラス宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0-1">インスタンス変数</a></li>
+<li><a href="#oncreate%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89-1"><code>onCreate</code>メソッド</a></li>
+<li><a href="#%E3%83%9C%E3%82%BF%E3%83%B3%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E3%81%AE%E8%A8%AD%E5%AE%9A">ボタンリスナーの設定</a></li>
+<li><a href="#%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E8%A8%AD%E5%AE%9A">ボトムナビゲーションのリスナー設定</a></li>
+<li><a href="#%E3%83%9C%E3%82%BF%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E6%9B%B4%E6%96%B0">ボタンテキストの更新</a></li>
+<li><a href="#fileviewer%E3%81%AE%E8%B5%B7%E5%8B%95"><code>FileViewer</code>の起動</a></li>
+</ul>
+</li>
+<li><a href="#10-settingsfragmentjava">10. <code>SettingsFragment.java</code></a>
+<ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80-2">パッケージ宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80-2">インポート宣言</a></li>
+<li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80-2">クラス宣言</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF-1">コンストラクタ</a></li>
+<li><a href="#oncreateview-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89-1"><code>onCreateView</code> メソッド</a></li>
+</ul>
+</li>
+<li><a href="#11-activity_file_listxml">11. <code>activity_file_list.xml</code></a>
+<ul>
+<li><a href="#%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86-2">ヘッダー部分</a></li>
+<li><a href="#%E5%8B%95%E7%94%BB%E3%83%9C%E3%82%BF%E3%83%B3%E9%83%A8%E5%88%86-1">動画ボタン部分</a></li>
+<li><a href="#%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">設定画面表示コンテナ</a></li>
+<li><a href="#%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%83%A8%E5%88%86-2">ボトムナビゲーション部分</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<h1 id="%E3%83%87%E3%83%A2%E3%81%AE%E6%89%8B%E9%A0%86">デモの手順</h1>
+<p>アプリケーションのデモを行う手順は以下の通りです。</p>
+<ol>
+<li>初めに、Webページの4つのDeepLinkのうちいずれかをタップし、APKファイルをダウンロードします。ここでは未インストール時にポップアップが表示されることを確認します。APKファイルは、Android Studioのプロジェクトからもダウンロードできます。事前に、デバイズ側の「不明なアプリのインストール」設定を許可しておいてください。</li>
+<li>apkファイルからアプリをインストール後、Webページの4つのDeepLinkをタップし、それぞれが正常に動作することを確認します。</li>
+<li>各ボタンをタップして、正常に動作することを確認します。</li>
+<li>デバイズを横画面にし、適切に画面が表示されていることを確認します。</li>
+</ol>
+<div style="page-break-after: always;"></div>
+<h1 id="%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E6%A6%82%E8%A6%81%E8%AA%AC%E6%98%8E">ソースコードの概要説明</h1>
+<p>今回の成果物となるソースコードは、大きく8つです。各ファイルの詳細を以下に示します。ファイル名の後に、Android Studio内でどこのディレクトリに保存されているかを記載しています。</p>
+<h3 id="1-indexhtmlweb%E3%83%9A%E3%83%BC%E3%82%B8%E7%94%A8">1. <code>index.html</code>(Webページ用)</h3>
+<p>このHTMLファイルはアプリケーションのデモ用のWebページを表しています。4つのDeepLink（<code>myapp://dda.io/view/file/123</code>、<code>myapp://dda.io/view/file/456</code>、<code>myapp://dda.io/view/file/789</code>、<code>myapp://dda.io/view/folders/123</code>）がそれぞれ異なるリンクとして記述されています。これらのリンクはアプリケーションがインストールされていない場合に、APKファイルのダウンロードリンクを表示するポップアップを表示します。</p>
+<h3 id="2-activitymainxmlsrcmainreslayout">2. <code>activity_main.xml</code>(src/main/res/layout)</h3>
+<p>このXMLファイルはアプリケーションのメイン画面のレイアウトを定義しています。WebView、ヘッダー(戻るボタンとカテゴリ名)、動画名、ファイルビューア、設定の各部分がレイアウトに含まれています。</p>
+<h3 id="3-bottomnavmenumainxml%E3%81%A8bottomnavmenufilelistxmlsrcmainresmenu">3. <code>bottom_nav_menu_main.xmlとbottom_nav_menu_file_list.xml</code>(src/main/res/menu)</h3>
+<p>アプリのボトムナビゲーションメニューの項目を定義するXMLファイル。ビューアと設定(file_listでは一覧と設定)の2つのメニューアイテムが含まれています。</p>
+<h3 id="4-fragmentsettingsxmlsrcmainreslayout">4. <code>fragment_settings.xml</code>(src/main/res/layout)</h3>
+<p>アプリ内の「設定」セクションのレイアウトを定義するXMLファイル。アプリのバージョン情報とフリーテキスト入力欄を表示するためのレイアウトが含まれています。</p>
+<h3 id="5-mainactivityjavasrcmainjavacomexampleapp">5. <code>MainActivity.java</code>(src/main/java/com/example/app)</h3>
+<p>このJavaファイルはアプリケーションのメインアクティビティを定義しています。ここではDeepLinkからのパラメータを取得し、対応するURLをWebViewにロードします。また、アプリがバックグラウンドに移行してから10分後にアプリを自動的に終了する機能も実装されています。</p>
+<h3 id="6-settingsfragmentjavasrcmainjavacomexampleapp">6. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</h3>
+<p>アプリの設定画面を表示するフラグメントのJavaファイル。レイアウトは<code>fragment_settings.xml</code>によって定義されています。</p>
+<h3 id="7-androidmanifestxmlsrcmainres">7. <code>AndroidManifest.xml</code>(src/main/res)</h3>
+<p>このXMLファイルはアプリケーションの基本的な設定とDeepLinkの設定を含んでいます。<code>&lt;data&gt;</code>タグ内の属性<code>android:host</code>、<code>android:scheme</code>、<code>android:pathPrefix</code>によりDeepLinkの形式が定義されています。</p>
+<h3 id="8-youtubehtml%E3%81%A8examplecomhtmlsrcmainassets">8. <code>YouTube.html</code>と<code>example_com.html</code>(src/main/assets)</h3>
+<p>これらのHTMLファイルはそれぞれ、YouTubeの動画と<code>example.com</code>のWebページを表示するためのiframeを含んでいます。これらのファイルはアプリケーション内部でローカルに保存され、DeepLinkからのパラメータにより特定のURLをWebViewにロードします。</p>
+<h3 id="9-filelistactivityjavasrcmainjavacomexampleapp">9. <code>FileListActivity.java</code>(src/main/java/com/example/app)</h3>
+<p>このJavaファイルは、アプリケーション内でファイルのリストを表示するアクティビティを定義しています。このアクティビティは、ユーザーが利用可能なファイルやフォルダを一覧表示し、選択することで詳細を閲覧できるように設計されています。</p>
+<h3 id="10-settingsfragmentjavasrcmainjavacomexampleapp">10. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</h3>
+<p><code>SettingsFragment.java</code>は、アプリケーションの設定を表示および編集するためのフラグメントを定義しています。このフラグメントは、ユーザーがアプリケーションの振る舞いや表示をカスタマイズするためのオプションを提供します。</p>
+<h3 id="11-activityfilelistxmlsrcmainreslayout">11. <code>activity_file_list.xml</code>(src/main/res/layout)</h3>
+<p>このXMLファイルは、<code>FileListActivity.java</code>で使用されるレイアウトを定義しています。ヘッダー部分、動画ボタン部分、設定画面を表示するためのコンテナ、およびボトムナビゲーション部分を含んでいます。各部分は、ユーザーがファイルやフォルダを効率的に閲覧・選択できるようにデザインされています。</p>
+<div style="page-break-after: always;"></div>
+<h1 id="%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E">ソースコードの詳細説明</h1>
+<h2 id="1-indexhtml">1. <code>index.html</code></h2>
+<hr>
+<h3 id="%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ヘッダー部分</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Deep Link<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</div></code></pre>
+<p>この部分は、HTML文書の宣言（<code>&lt;!DOCTYPE html&gt;</code>）と基本的なメタデータ（文字コード、ページタイトル）を設定する<code>&lt;head&gt;</code>セクションを示しています。</p>
+<h3 id="css%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%82%B7%E3%83%BC%E3%83%88">CSSスタイルシート</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    <span class="hljs-selector-id">#app-banner</span> {
+        <span class="hljs-attribute">display</span>: none;
+        <span class="hljs-attribute">position</span>: fixed;
+        <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">background-color</span>: lightgrey;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+        <span class="hljs-attribute">text-align</span>: center;
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+</div></code></pre>
+<p>この部分は、IDが&quot;app-banner&quot;の要素のスタイルを定義する内部CSSスタイルシートです。初期状態では、アプリインストールバナーは非表示に設定されています。</p>
+<h3 id="%E6%9C%AC%E6%96%87%E3%81%A8%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%AA%E3%83%B3%E3%82%AF">本文とディープリンク</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"deep-link"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"myapp://dda.io/view/file/123"</span>&gt;</span>example.comのWebページ<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    ...
+</div></code></pre>
+<p>ここは、HTMLの本文部分を示しており、<code>&lt;body&gt;</code>タグで開始されます。特定のディープリンクを指す複数のリンクが含まれています。</p>
+<h3 id="%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%83%90%E3%83%8A%E3%83%BC">アプリインストールバナー</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app-banner"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Install our app for a better experience!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://github.com/shuka733/Deeplinktest/raw/main/app-debug.apk"</span> <span class="hljs-attr">download</span>&gt;</span>Install App<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>このセクションは、アプリをインストールするためのプロモーションバナーを表示する<code>&lt;div&gt;</code>要素を示しています。バナーにはアプリのapkファイルへの直接ダウンロードリンクが含まれています。</p>
+<h3 id="javascript%E3%82%B3%E3%83%BC%E3%83%89">JavaScriptコード</h3>
+<pre class="hljs"><code><div>&lt;script&gt;
+    <span class="hljs-keyword">var</span> deepLinks = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'.deep-link'</span>);
+    ...
+&lt;<span class="hljs-regexp">/script&gt;
+</span></div></code></pre>
+<p>この部分は、ディープリンクのクリックイベントをハンドルするためのJavaScriptコードを示しています。クリックされたディープリンクを開き、一定時間後にアプリが未インストールである場合にインストールバナーを表示する機能が定義されています。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="2-activitymainxml">2. <code>activity_main.xml</code></h2>
+<hr>
+<p>このレイアウトは、アプリケーションのメイン画面の基盤となるレイアウトです。内部の各要素はこのレイアウトの上に配置されます。</p>
+<h3 id="%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">ヘッダーコンテナ</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/header"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"48dp"</span>
+    <span class="hljs-attr">android:background</span>=<span class="hljs-string">"#FF5733"</span>
+    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span>
+    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center_vertical"</span>
+    <span class="hljs-attr">android:weightSum</span>=<span class="hljs-string">"3"</span>
+    <span class="hljs-attr">android:layout_alignParentTop</span>=<span class="hljs-string">"true"</span>&gt;</span>
+    ...
+<span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+</div></code></pre>
+<p>この部分はアプリケーションのヘッダーを表示するためのレイアウトです。ヘッダー内には、左側に戻るボタン、中央にカテゴリ名表示部分、そして右側にダミーのビューが配置されています。</p>
+<h4 id="%E6%88%BB%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3">戻るボタン</h4>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/back"</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">android:text</span>=<span class="hljs-string">"@string/nav_back"</span>
+    <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"16sp"</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center|start"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、ヘッダーの左端に表示される戻るボタンのテキストビューです。</p>
+<h4 id="%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%90%8D%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86">カテゴリ名表示部分</h4>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fileViewer"</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">android:text</span>=<span class="hljs-string">""</span>
+    <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"20sp"</span>
+    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center"</span> /&gt;</span>
+</div></code></pre>
+<p>ヘッダー中央に表示されるテキストビューです。動的にカテゴリ名やその他の情報を表示するための部分です。</p>
+<h3 id="%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86">パラメータ表示部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/parameter"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"60dp"</span>
+    <span class="hljs-attr">android:layout_below</span>=<span class="hljs-string">"@id/header"</span>
+    <span class="hljs-attr">android:text</span>=<span class="hljs-string">""</span>
+    <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"20sp"</span>
+    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、DeepLinkから受け取ったパラメータを表示するためのテキストビューです。</p>
+<h3 id="%E3%83%95%E3%83%A9%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E8%A1%A8%E7%A4%BA%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">フラグメント表示コンテナ</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">FrameLayout</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fragment_container"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>
+    <span class="hljs-attr">android:layout_below</span>=<span class="hljs-string">"@id/parameter"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、異なるフラグメントを表示するためのコンテナとして機能するフレームレイアウトです。</p>
+<h3 id="webview%E9%83%A8%E5%88%86">WebView部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">WebView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/webview"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>
+    <span class="hljs-attr">android:layout_below</span>=<span class="hljs-string">"@id/parameter"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、Webページを表示するためのWebViewです。DeepLinkからのパラメータに応じて、異なるURLがロードされます。</p>
+<h3 id="%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%83%A8%E5%88%86">ボトムナビゲーション部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">com.google.android.material.bottomnavigation.BottomNavigationView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:layout_alignParentBottom</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">app:menu</span>=<span class="hljs-string">"@menu/bottom_nav_menu_main"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、アプリケーションの下部に配置されるボトムナビゲーションビューです。&quot;ビューア&quot;と&quot;設定&quot;という2つのメニューアイテムを持っています。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="3-bottomnavmenumainxml">3. <code>bottom_nav_menu_main.xml</code></h2>
+<hr>
+<p>このXMLファイルは、アプリケーションのボトムナビゲーションメニューのアイテムを定義しています。</p>
+<h3 id="%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0-%E3%83%93%E3%83%A5%E3%83%BC%E3%82%A2">メニューアイテム: ビューア</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">item</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/viewer"</span>
+    <span class="hljs-attr">android:title</span>=<span class="hljs-string">"@string/nav_viewer"</span>
+    <span class="hljs-attr">app:showAsAction</span>=<span class="hljs-string">"ifRoom"</span> /&gt;</span>
+</div></code></pre>
+<ul>
+<li><code>android:id</code>: このアイテムのIDとして<code>viewer</code>を指定しています。これにより、Javaコード側からこのアイテムを識別・操作できます。</li>
+<li><code>android:title</code>: このアイテムの表示名としてリソース文字列<code>@string/nav_viewer</code>（&quot;ビューア&quot;）を使用しています。</li>
+<li><code>app:showAsAction</code>: このアイテムがアクションバーの中に表示される条件を指定しています。<code>ifRoom</code>はスペースがある場合にのみアクションバーに表示することを意味します。ボトムナビゲーションにおいては通常は無視されますが、一般的なメニューにおいてはこの属性が役立ちます。</li>
+</ul>
+<h3 id="%E3%83%A1%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0-%E8%A8%AD%E5%AE%9A">メニューアイテム: 設定</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">item</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/settings"</span>
+    <span class="hljs-attr">android:title</span>=<span class="hljs-string">"@string/nav_settings"</span>
+    <span class="hljs-attr">app:showAsAction</span>=<span class="hljs-string">"ifRoom"</span> /&gt;</span>
+</div></code></pre>
+<ul>
+<li><code>android:id</code>: このアイテムのIDとして<code>settings</code>を指定しています。</li>
+<li><code>android:title</code>: このアイテムの表示名としてリソース文字列<code>@string/nav_settings</code>（&quot;設定&quot;）を使用しています。</li>
+<li><code>app:showAsAction</code>: 同様に、このアイテムがアクションバーの中に表示される条件を指定しています。</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<h2 id="4-fragmentsettingsxml">4. <code>fragment_settings.xml</code></h2>
+<hr>
+<p>このXMLファイルは、アプリケーションの設定画面のレイアウトを定義しています。</p>
+<h3 id="%E3%83%AB%E3%83%BC%E3%83%88%E8%A6%81%E7%B4%A0-linearlayout">ルート要素: <code>LinearLayout</code></h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span>
+    <span class="hljs-attr">android:padding</span>=<span class="hljs-string">"16dp"</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li><code>android:orientation</code>: 子要素を垂直方向に並べるために<code>vertical</code>を指定しています。</li>
+<li><code>android:padding</code>: すべての側面に16dpのパディングを追加しています。これにより、子要素が端に接触しないようになります。</li>
+</ul>
+<h3 id="%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%93%E3%83%A5%E3%83%BC-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E6%83%85%E5%A0%B1">テキストビュー: バージョン情報</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/versionInfo"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:text</span>=<span class="hljs-string">"@string/version_info"</span>
+    <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"20sp"</span> /&gt;</span>
+</div></code></pre>
+<ul>
+<li><code>android:id</code>: このテキストビューのIDとして<code>versionInfo</code>を指定しています。</li>
+<li><code>android:text</code>: テキストビューの内容としてリソース文字列<code>@string/version_info</code>を表示しています。</li>
+<li><code>android:textSize</code>: テキストのサイズとして20spを指定しています。</li>
+</ul>
+<h3 id="%E3%82%A8%E3%83%87%E3%82%A3%E3%83%83%E3%83%88%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%85%A5%E5%8A%9B">エディットテキスト: フリーテキスト入力</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">EditText</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/editableText"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:hint</span>=<span class="hljs-string">"Enter text here..."</span>
+    <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"16dp"</span>/&gt;</span>
+</div></code></pre>
+<ul>
+<li><code>android:id</code>: このエディットテキストのIDとして<code>editableText</code>を指定しています。</li>
+<li><code>android:hint</code>: ユーザーが何も入力していないときに表示されるヒントテキストとして&quot;Enter text here...&quot;を指定しています。</li>
+<li><code>android:layout_marginTop</code>: 上側に16dpのマージンを追加しています。</li>
+</ul>
+<p>このレイアウトは設定画面を表しており、バージョン情報を表示するテキストビューと、フリーテキストを入力するためのエディットテキストが含まれています。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="5-mainactivityjava">5. <code>MainActivity.java</code></h2>
+<hr>
+<h3 id="%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+</div></code></pre>
+<p>この行は、このJavaクラスが所属するパッケージを宣言しています。<code>com.example.app</code>はアプリケーションの名前空間を示しており、このパッケージの中には<code>MainActivity</code>の他にもいくつかのクラスやリソースが含まれている可能性があります。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> androidx.appcompat.app.AppCompatActivity;
+<span class="hljs-keyword">import</span> android.content.Intent;
+<span class="hljs-keyword">import</span> android.graphics.Color;
+<span class="hljs-keyword">import</span> android.net.Uri;
+<span class="hljs-keyword">import</span> android.os.Bundle;
+<span class="hljs-keyword">import</span> android.os.Handler;
+<span class="hljs-keyword">import</span> android.view.View;
+<span class="hljs-keyword">import</span> android.webkit.WebSettings;
+<span class="hljs-keyword">import</span> android.webkit.WebView;
+<span class="hljs-keyword">import</span> android.widget.LinearLayout;
+<span class="hljs-keyword">import</span> android.widget.TextView;
+<span class="hljs-keyword">import</span> com.google.android.material.bottomnavigation.BottomNavigationView;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+</div></code></pre>
+<p>以下の部分は、このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。</p>
+<h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>{
+</div></code></pre>
+<p>この行は、<code>MainActivity</code>という名前の新しいクラスを宣言しています。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0">インスタンス変数</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> Handler handler;
+<span class="hljs-keyword">private</span> Runnable shutdownRunnable;
+</div></code></pre>
+<p>これらはクラスのプライベートインスタンス変数です。</p>
+<h3 id="oncreate%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreate</code>メソッド</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>{
+    ...
+}
+</div></code></pre>
+<p><code>onCreate</code>はアクティビティライフサイクルにおける最初に呼ばれるメソッドです。</p>
+<h4 id="51-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E5%88%9D%E6%9C%9F%E5%8C%96">5.1. 基本的な初期化</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">super</span>.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+</div></code></pre>
+<p>上記のコードで、親クラスの<code>onCreate</code>メソッドを呼び出し、UIのレイアウトを設定しています。</p>
+<h4 id="52-webview%E3%81%AE%E8%A8%AD%E5%AE%9A">5.2. WebViewの設定</h4>
+<pre class="hljs"><code><div>WebView webView = findViewById(R.id.webview);
+WebSettings webSettings = webView.getSettings();
+webSettings.setJavaScriptEnabled(<span class="hljs-keyword">true</span>);
+</div></code></pre>
+<p>上記のコードで、<code>WebView</code>のインスタンスを取得し、JavaScriptを有効にしています。</p>
+<h4 id="53-%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%81%A8%E5%8B%95%E7%94%BB%E5%90%8D%E3%81%AE%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.3. カテゴリと動画名の表示部分の初期化</h4>
+<pre class="hljs"><code><div>TextView categoryTextView = findViewById(R.id.fileViewer);
+TextView videoNameTextView = findViewById(R.id.parameter);
+</div></code></pre>
+<p>この部分で、<code>TextView</code>のインスタンスを取得しています。</p>
+<h4 id="54-intent%E3%81%8B%E3%82%89%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%96%E5%BE%97">5.4. Intentからのデータ取得</h4>
+<pre class="hljs"><code><div>Intent intent = getIntent();
+String action = intent.getAction();
+Uri data = intent.getData();
+</div></code></pre>
+<p>この部分で、アクティビティが開始されたときの<code>Intent</code>からデータを取得しています。</p>
+<h4 id="55-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.5. ボトムナビゲーションの初期化</h4>
+<pre class="hljs"><code><div>BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+</div></code></pre>
+<p>ボトムナビゲーションのインスタンスを取得しています。</p>
+<h4 id="56-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%AE%E6%BA%96%E5%82%99">5.6. シャットダウンの準備</h4>
+<pre class="hljs"><code><div>handler = <span class="hljs-keyword">new</span> Handler();
+shutdownRunnable = <span class="hljs-keyword">new</span> Runnable() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+        finishAndRemoveTask();
+    }
+};
+</div></code></pre>
+<p>アプリがバックグラウンドに移行した後のシャットダウンのための準備をしています。</p>
+<h4 id="57-%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86%E3%81%AE%E8%A8%AD%E5%AE%9A">5.7. ヘッダー部分の設定</h4>
+<pre class="hljs"><code><div>LinearLayout header = findViewById(R.id.header);
+header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</span>));
+</div></code></pre>
+<p>ヘッダー部分の背景色を設定しています。</p>
+<h4 id="58-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC">5.8. ボトムナビゲーションのイベントリスナー</h4>
+<pre class="hljs"><code><div>bottomNav.setOnNavigationItemSelectedListener(item -&gt; {
+    ...
+});
+</div></code></pre>
+<p>ボトムナビゲーションの各アイテムが選択されたときの動作を定義しています。</p>
+<h3 id="%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">アクティビティのライフサイクルメソッド</h3>
+<h4 id="510-onpause">5.10. <code>onPause()</code></h4>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPause</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">super</span>.onPause();
+    handler.postDelayed(shutdownRunnable, <span class="hljs-number">10</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);
+}
+</div></code></pre>
+<p>アクティビティがバックグラウンドに移動するときに呼ばれるメソッドです。</p>
+<h4 id="511-onresume">5.11. <code>onResume()</code></h4>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResume</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">super</span>.onResume();
+    handler.removeCallbacks(shutdownRunnable);
+}
+</div></code></pre>
+<p>アクティビティがフォアグラウンドに戻るときに呼ばれるメソッドです。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="6-settingsfragment">6. <code>SettingsFragment</code></h2>
+<hr>
+<p><code>SettingsFragment</code>は、設定画面を表示するためのフラグメントであり、UIのレイアウトは<code>fragment_settings.xml</code>ファイルに定義されています。このクラスはシンプルですが、アプリケーションの設定や情報を表示するための基本的な機能を持っています。</p>
+<h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E6%A6%82%E8%A6%81">クラスの概要</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SettingsFragment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Fragment</span> </span>{
+</div></code></pre>
+<p>このクラスは、<code>Fragment</code>クラスを拡張することで、アプリケーション内の設定画面部分を表しています。</p>
+<h3 id="%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF">コンストラクタ</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// コンストラクタ</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SettingsFragment</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// Required empty public constructor</span>
+}
+</div></code></pre>
+<p><code>SettingsFragment</code>の公開コンストラクタです。フラグメントのインスタンス生成時に呼び出されるものの、特に何もしていません。フラグメントには公開のデフォルトコンストラクタが必要とされるため、これが用意されています。</p>
+<h3 id="oncreateview-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreateView</code> メソッド</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">onCreateView</span><span class="hljs-params">(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState)</span> </span>{
+    <span class="hljs-comment">// このフラグメントのレイアウトをインフレートする</span>
+    <span class="hljs-keyword">return</span> inflater.inflate(R.layout.fragment_settings, container, <span class="hljs-keyword">false</span>);
+}
+</div></code></pre>
+<p>この<code>onCreateView</code>メソッドは、フラグメントのUI部分が初めて描画される際にシステムから呼び出されます。メソッド内では、<code>LayoutInflater</code>を使用して、<code>fragment_settings.xml</code>というリソースファイルに定義されたレイアウトをインフレート（ロード）しています。その後、このインフレートされたビューがメソッドから返され、フラグメントのUIとして表示されます。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="7-activityfilelistxml">7. <code>activity_file_list.xml</code></h2>
+<hr>
+<h3 id="%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ヘッダー部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/header"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:background</span>=<span class="hljs-string">"#E0E0E0"</span>
+    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span>
+    <span class="hljs-attr">android:padding</span>=<span class="hljs-string">"16dp"</span>
+    <span class="hljs-attr">android:layout_alignParentTop</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center_horizontal"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
+        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/parameterTextView"</span>
+        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span>
+        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+        <span class="hljs-attr">android:text</span>=<span class="hljs-string">""</span>
+        <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"20sp"</span>
+        <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">"#000000"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+</div></code></pre>
+<p>この部分はアプリケーションのヘッダーを表示するためのレイアウトです。</p>
+<h3 id="%E5%8B%95%E7%94%BB%E3%83%9C%E3%82%BF%E3%83%B3%E9%83%A8%E5%88%86">動画ボタン部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">ScrollView</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:layout_below</span>=<span class="hljs-string">"@+id/header"</span>
+    <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
+        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/buttonContainer"</span>
+        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+        <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- 以下、ボタンの例 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/btnExampleCom"</span>
+            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+            <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"16dp"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ScrollView</span>&gt;</span>
+</div></code></pre>
+<p>この部分には、動画の一覧を表示するためのボタンが配置されます。</p>
+<h3 id="%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E7%94%A8%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">設定画面表示用のコンテナ</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">FrameLayout</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fragment_container"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:layout_below</span>=<span class="hljs-string">"@+id/header"</span>
+    <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、設定画面を表示するためのフラグメントを配置するコンテナとして機能します。</p>
+<h3 id="%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%83%A8%E5%88%86">ボトムナビゲーション部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">com.google.android.material.bottomnavigation.BottomNavigationView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>
+    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>
+    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>
+    <span class="hljs-attr">android:layout_alignParentBottom</span>=<span class="hljs-string">"true"</span>
+    <span class="hljs-attr">app:menu</span>=<span class="hljs-string">"@menu/bottom_nav_menu_file_list"</span> /&gt;</span>
+</div></code></pre>
+<p>この部分は、アプリケーションの下部に配置されるボトムナビゲーションビューです。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="8-youtubehtml-%E3%81%A8-examplecomhtml">8. <code>YouTube.html と example_com.html</code></h2>
+<hr>
+<p>これらのHTMLファイルは、アプリケーション内部でローカルに保存されているもので、アプリのWebViewで表示する際のコンテンツとして利用されます。</p>
+<h3 id="%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E5%AE%A3%E8%A8%80%E3%81%A8%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ドキュメントの宣言とヘッダー部分</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>YouTube Video<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</div></code></pre>
+<p>この部分は、HTML文書の宣言（<code>&lt;!DOCTYPE html&gt;</code>）と、基本的なメタデータ（文字コード、ページタイトル）を設定する<code>&lt;head&gt;</code>セクションです。</p>
+<h3 id="%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%AE%E5%AE%9A%E7%BE%A9">スタイルの定義</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    <span class="hljs-selector-tag">html</span>, <span class="hljs-selector-tag">body</span> {
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#000</span>;
+    }
+    <span class="hljs-selector-class">.video-container</span> {
+        <span class="hljs-attribute">position</span>: relative;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+    }
+    <span class="hljs-selector-class">.video-container</span> <span class="hljs-selector-tag">iframe</span> {
+        <span class="hljs-attribute">position</span>: absolute;
+        <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+</div></code></pre>
+<p>この内部CSSスタイルシートは、ページ全体の背景色やiframeの動画の位置、サイズを定義しています。具体的には、動画がページ全体をカバーするように設定されています。</p>
+<h3 id="%E6%9C%AC%E6%96%87%E3%81%A8%E5%8B%95%E7%94%BB%E3%81%AE%E5%9F%8B%E3%82%81%E8%BE%BC%E3%81%BF">本文と動画の埋め込み</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"video-container"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://www.youtube.com/embed/bjmBJ1Fl0cs?autoplay=1"</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">"0"</span> <span class="hljs-attr">allowfullscreen</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+<p>この部分は、本文（<code>&lt;body&gt;</code>）の開始で、YouTubeの動画を埋め込む<code>&lt;iframe&gt;</code>が含まれています。動画は自動再生モードで、フルスクリーンモードも許可されています。</p>
+<h3 id="examplecomhtml%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"><code>example_com.html</code>について</h3>
+<p><code>example_com.html</code>は、基本的な構造とスタイルが<code>YouTube.html</code>と同一です。唯一の違いは、<code>&lt;iframe&gt;</code>の<code>src</code>属性が<code>https://www.youtube.com/embed/bjmBJ1Fl0cs?autoplay=1</code>から<code>http://example.com</code>に変更されている点です。このことから、<code>example_com.html</code>は<code>http://example.com</code>のページ内容を埋め込むためのものとして機能します。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="9-filelistactivityjava">9. <code>FileListActivity.java</code></h2>
+<hr>
+<h3 id="%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+</div></code></pre>
+<p>この行は、このJavaクラスが所属するパッケージを宣言しています。<code>com.example.app</code>はアプリケーションの名前空間を示しており、このパッケージの中には<code>FileListActivity</code>の他にもいくつかのクラスやリソースが含まれている可能性があります。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
+<p>以下の部分は、このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> android.content.Intent;
+<span class="hljs-keyword">import</span> android.net.Uri;
+<span class="hljs-keyword">import</span> android.os.Bundle;
+<span class="hljs-keyword">import</span> android.view.View;
+<span class="hljs-keyword">import</span> android.widget.Button;
+<span class="hljs-keyword">import</span> android.widget.LinearLayout;
+<span class="hljs-keyword">import</span> android.widget.TextView;
+
+<span class="hljs-keyword">import</span> androidx.appcompat.app.AppCompatActivity;
+<span class="hljs-keyword">import</span> androidx.fragment.app.FragmentTransaction;
+
+<span class="hljs-keyword">import</span> com.google.android.material.bottomnavigation.BottomNavigationView;
+
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+</div></code></pre>
+<p>これらのインポート宣言により、ソースコード内でこれらのクラスやインターフェースを完全修飾名を使用せずに参照することができます。</p>
+<h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileListActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>{
+</div></code></pre>
+<p><code>FileListActivity</code>は、アプリ内のファイル一覧を表示するアクティビティです。このクラスはAndroidの<code>AppCompatActivity</code>を継承しているため、AndroidのライフサイクルメソッドやUI関連の機能を利用することができます。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0">インスタンス変数</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> LinearLayout buttonContainer; <span class="hljs-comment">// 動画ボタンを格納するコンテナ</span>
+<span class="hljs-keyword">private</span> TextView headerTextView;
+</div></code></pre>
+<p><code>buttonContainer</code>は動画のボタン一覧を格納する<code>LinearLayout</code>を参照します。<code>headerTextView</code>はヘッダー部分のテキストを表示する<code>TextView</code>を参照します。</p>
+<h3 id="oncreate%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreate</code>メソッド</h3>
+<p>このメソッドは、アクティビティのインスタンスが生成される際にシステムから呼び出されます。基本的な初期化やUIのセットアップをこのメソッド内で行います。</p>
+<h3 id="%E3%83%9C%E3%82%BF%E3%83%B3%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E3%81%AE%E8%A8%AD%E5%AE%9A">ボタンリスナーの設定</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setButtonListeners</span><span class="hljs-params">()</span> </span>{ ... }
+</div></code></pre>
+<p>このメソッドでは、各動画のボタンに対してクリックリスナーを設定しています。ユーザーがボタンをタップすると、<code>openFileViewer</code>メソッドが呼び出され、指定されたパラメータをもとに<code>MainActivity</code>が起動します。</p>
+<h3 id="%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E8%A8%AD%E5%AE%9A">ボトムナビゲーションのリスナー設定</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBottomNavigationListener</span><span class="hljs-params">(BottomNavigationView bottomNav)</span> </span>{ ... }
+</div></code></pre>
+<p>このメソッドでは、ボトムナビゲーションの各アイテムが選択されたときの動作を定義しています。</p>
+<h3 id="%E3%83%9C%E3%82%BF%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E6%9B%B4%E6%96%B0">ボタンテキストの更新</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateButtonText</span><span class="hljs-params">()</span> </span>{ ... }
+</div></code></pre>
+<p>このメソッドでは、各動画のボタンのテキストを更新しています。動画のカテゴリ名と動画名を組み合わせて、ボタンのテキストとして設定しています。</p>
+<h3 id="fileviewer%E3%81%AE%E8%B5%B7%E5%8B%95"><code>FileViewer</code>の起動</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openFileViewer</span><span class="hljs-params">(String parameter)</span> </span>{ ... }
+</div></code></pre>
+<p>このメソッドでは、指定されたパラメータに基づいて<code>MainActivity</code>を起動しています。パラメータは、動画のURLを決定するためのキーとして使用されます。</p>
+<div style="page-break-after: always;"></div>
+<hr>
+<h2 id="10-settingsfragmentjava">10. <code>SettingsFragment.java</code></h2>
+<hr>
+<h3 id="%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+</div></code></pre>
+<p>この行は、Javaクラスが所属するパッケージを示しています。<code>com.example.app</code>はアプリケーションの名前空間を示しており、このパッケージ内には他のクラスやリソースが存在する可能性があります。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> androidx.fragment.app.Fragment;
+<span class="hljs-keyword">import</span> android.os.Bundle;
+<span class="hljs-keyword">import</span> android.view.LayoutInflater;
+<span class="hljs-keyword">import</span> android.view.View;
+<span class="hljs-keyword">import</span> android.view.ViewGroup;
+</div></code></pre>
+<p>これらの行は、<code>SettingsFragment</code>クラスで使用する外部のクラスやインターフェースをインポートするための宣言です。特に、<code>androidx.fragment.app.Fragment</code>はAndroidのフラグメント関連の基本クラスを表しています。</p>
+<h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SettingsFragment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Fragment</span> </span>{
+</div></code></pre>
+<p>この行で、<code>SettingsFragment</code>という新しいフラグメントクラスを宣言しています。このクラスは<code>Fragment</code>クラスを継承しており、これによりAndroidのフラグメントの基本的な機能を使用できます。</p>
+<h3 id="%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF">コンストラクタ</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SettingsFragment</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// Required empty public constructor</span>
+}
+</div></code></pre>
+<p>この部分は<code>SettingsFragment</code>のデフォルトコンストラクタを定義しています。フラグメントのインスタンスがシステムによって再生成される際には、引数なしの公開コンストラクタが必要です。</p>
+<h3 id="oncreateview-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreateView</code> メソッド</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">onCreateView</span><span class="hljs-params">(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState)</span> </span>{
+    <span class="hljs-keyword">return</span> inflater.inflate(R.layout.fragment_settings, container, <span class="hljs-keyword">false</span>);
+}
+</div></code></pre>
+<p><code>onCreateView</code>はフラグメントのライフサイクルにおいてUIが初めて描画される際にシステムから呼び出されるメソッドです。このメソッド内で、フラグメントのUIがインフレートされ、そのルートビューが返されます。この例では、<code>fragment_settings.xml</code>がインフレートされています。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="11-activityfilelistxml">11. <code>activity_file_list.xml</code></h2>
+<hr>
+<p>このレイアウトは、アプリケーション内で利用可能な動画のリストを表示する画面の基盤となるレイアウトです。</p>
+<h3 id="%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ヘッダー部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/header"</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center_horizontal"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
+        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/parameterTextView"</span>
+        <span class="hljs-attr">...</span>
+        <span class="hljs-attr">android:textColor</span>=<span class="hljs-string">"#000000"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+</div></code></pre>
+<p>この部分はアプリの上部に表示され、DeepLinkから受け取ったパラメータを表示するためのテキストビューを含む。</p>
+<h3 id="%E5%8B%95%E7%94%BB%E3%83%9C%E3%82%BF%E3%83%B3%E9%83%A8%E5%88%86">動画ボタン部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">ScrollView</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
+        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/buttonContainer"</span>
+        <span class="hljs-attr">...</span>
+        <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/btnExampleCom"</span>
+            <span class="hljs-attr">...</span>
+            <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"16dp"</span> /&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/btnYouTube"</span>
+            <span class="hljs-attr">...</span>
+            <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"16dp"</span> /&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/btnExampleDotCom"</span>
+            <span class="hljs-attr">...</span>
+            <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"16dp"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ScrollView</span>&gt;</span>
+</div></code></pre>
+<p>利用可能な動画のリストを表示する部分です。各動画を開くためのボタンが垂直に並べられています。</p>
+<h3 id="%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A">設定画面表示コンテナ</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">FrameLayout</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fragment_container"</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">android:layout_above</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span> /&gt;</span>
+</div></code></pre>
+<p>設定フラグメントを表示するためのコンテナ部分です。</p>
+<h3 id="%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%83%A8%E5%88%86">ボトムナビゲーション部分</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">com.google.android.material.bottomnavigation.BottomNavigationView</span>
+    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/bottomNavigationView"</span>
+    <span class="hljs-attr">...</span>
+    <span class="hljs-attr">app:menu</span>=<span class="hljs-string">"@menu/bottom_nav_menu_file_list"</span> /&gt;</span>
+</div></code></pre>
+<p>アプリケーションの下部に配置されるボトムナビゲーションビューです。この画面では、動画リストと設定画面を切り替えるためのメニューアイテムが配置されています。</p>
+<hr>
+
+</body>
+</html>

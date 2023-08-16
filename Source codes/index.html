@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Link</title>
+    <style>
+        #app-banner {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: lightgrey;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <p><a class="deep-link" href="myapp://dda.io/view/file/123">example.comのWebページ</a></p>
+    <p><a class="deep-link" href="myapp://dda.io/view/file/456">Youtubeサンプル動画</a></p>
+    <p><a class="deep-link" href="myapp://dda.io/view/file/789">example.comのWebページ(iframe)</a></p>
+    <p><a class="deep-link" href="myapp://dda.io/view/folders/123">ファイルビューア一覧</a></p>
+
+    <div id="app-banner">
+        <p>Install our app for a better experience!</p>
+        <a href="https://github.com/shuka733/Deeplinktest/raw/main/app-debug.apk" download>Install App</a>
+    </div>
+
+    <script>
+        var deepLinks = document.querySelectorAll('.deep-link');
+        deepLinks.forEach(function(deepLink) {
+            deepLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                var clickedLink = this.href;
+                window.location.href = clickedLink;
+                setTimeout(function() {
+                    if(document.hasFocus()) {
+                        document.getElementById('app-banner').style.display = 'block';
+                    }
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

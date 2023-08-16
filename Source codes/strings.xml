@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">App</string>
+    <string name="header_title">ファイルビューア</string>
+    <string name="nav_viewer">ビューア</string>
+    <string name="nav_settings">設定</string>
+    <string name="nav_back">＜戻る</string>
+    <string name="nav_list">一覧</string>
+    <string name="version_info">Version: 1.0.0</string>
+    <string name="category_name1">カテゴリ1</string>
+    <string name="category_name2">カテゴリ2</string>
+    <string name="category_name3">カテゴリ3</string>
+    <string name="video_name1">動画名1</string>
+    <string name="video_name2">動画名2</string>
+    <string name="video_name3">動画名3</string>
+    <string name="video_format">%1$s - %2$s</string>
+</resources>

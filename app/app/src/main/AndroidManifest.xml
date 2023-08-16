@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.app">
+
+    <!-- インターネットへのアクセス権限を要求 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.App"
+        android:usesCleartextTraffic="true">
+
+        <!-- FileListActivityの設定。アプリの起動時に開くアクティビティとして設定されています -->
+        <activity android:name=".FileListActivity" android:exported="true">
+            <!-- アプリの起動に使われるintent-filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Deeplink用のintent-filter。myapp://dda.io/view/folders を受け取る設定 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="dda.io"
+                    android:scheme="myapp"
+                    android:pathPrefix="/view/folders/" />
+            </intent-filter>
+        </activity>
+
+        <!-- MainActivityの設定。特定のDeepLink (myapp://dda.io/view/file/) を受け取る設定 -->
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="dda.io"
+                    android:scheme="myapp"
+                    android:pathPrefix="/view/file/" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
