@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- ヘッダー部分 -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#FF5733"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="3"
+        android:layout_alignParentTop="true">
+
+        <!-- 戻るボタン：左端に表示されるボタン -->
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/nav_back"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:gravity="center|start" />
+
+        <!-- カテゴリ名表示部分：ヘッダー中央に表示されるテキスト -->
+        <TextView
+            android:id="@+id/fileViewer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="center" />
+
+        <!-- ダミービュー：ヘッダーの右端部分のスペースを確保するためのビュー -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <!-- 動画名表示部分：ヘッダーの下に表示されるテキスト -->
+    <TextView
+        android:id="@+id/parameter"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/header"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:gravity="center" />
+
+    <WebView
+        android:id="@+id/fileViewerWebview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/parameter" />
+
+</RelativeLayout>
