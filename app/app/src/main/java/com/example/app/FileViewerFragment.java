@@ -48,7 +48,7 @@ public class FileViewerFragment extends Fragment {
             String parameter = data.getLastPathSegment();
 
             Map<String, String> urlMap = new HashMap<>();
-            urlMap.put("123", "http://example.com");
+            urlMap.put("123", "https://drive.google.com/file/d/1A0wlhjWGG1DLd8-rLI0FIYM6OYnhQjyr/preview");
             urlMap.put("456", "file:///android_asset/YouTube.html");
             urlMap.put("789", "file:///android_asset/example_com.html");
 
@@ -59,7 +59,7 @@ public class FileViewerFragment extends Fragment {
         if (url != null) {
             webView.loadUrl(url);
             switch (url) {
-                case "http://example.com":
+                case "https://drive.google.com/file/d/1A0wlhjWGG1DLd8-rLI0FIYM6OYnhQjyr/preview":
                     categoryTextView.setText(getString(R.string.category_name1));
                     videoNameTextView.setText(getString(R.string.video_name1));
                     break;
