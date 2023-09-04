@@ -46,13 +46,7 @@ public class FileViewerFragment extends Fragment {
             url = intent.getStringExtra("URL");
         } else if (Intent.ACTION_VIEW.equals(action) && data != null) {
             String parameter = data.getLastPathSegment();
-
-            Map<String, String> urlMap = new HashMap<>();
-            urlMap.put("123", "https://drive.google.com/file/d/1A0wlhjWGG1DLd8-rLI0FIYM6OYnhQjyr/preview");
-            urlMap.put("456", "file:///android_asset/YouTube.html");
-            urlMap.put("789", "file:///android_asset/example_com.html");
-
-            url = urlMap.get(parameter);
+            url = UrlMappingHelper.getUrl(parameter);
         }
 
         // WebViewにURLをロードして、カテゴリと動画名をセット
