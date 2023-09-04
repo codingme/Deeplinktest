@@ -60,34 +60,10 @@ public class MainActivity extends AppCompatActivity {
         // 画面の向きに応じてビューの調整
         adjustViewsForOrientation(getResources().getConfiguration().orientation);
 
-        // Intentからデータの取得
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        String url = null;
-        if (intent.hasExtra("URL")) {
-            url = intent.getStringExtra("URL");
-        } else if (Intent.ACTION_VIEW.equals(action)) {
-            Uri data = intent.getData();
-            if (data != null) {
-                String parameter = data.getLastPathSegment();
-                Map<String, String> urlMap = new HashMap<>();
-                urlMap.put("123", "https://drive.google.com/file/d/1A0wlhjWGG1DLd8-rLI0FIYM6OYnhQjyr/preview");
-                urlMap.put("456", "file:///android_asset/YouTube.html");
-                urlMap.put("789", "file:///android_asset/example_com.html");
-                url = urlMap.get(parameter);
-            }
-        }
-
-        // URLが存在する場合、FileViewerFragmentを自動的に表示する
-        if (url != null) {
-            FileViewerFragment fileViewerFragment = new FileViewerFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("URL", url);
-            fileViewerFragment.setArguments(bundle);
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fileViewerFragment)
+                    .replace(R.id.fragment_container, new FileViewerFragment())
                     .commit();
-            bottomNav.setSelectedItemId(R.id.viewer);  // ボトムナビゲーションをビューアに設定
         }
 
     }
