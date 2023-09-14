@@ -769,7 +769,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 <div style="page-break-after: always;"></div>
 
 ## 9. `FileListActivity.java`
----
 
 ### パッケージ宣言
 
@@ -777,11 +776,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 package com.example.app;
 ```
 
-この行は、このJavaクラスが所属するパッケージを宣言しています。`com.example.app`はアプリケーションの名前空間を示しており、このパッケージの中には`FileListActivity`の他にもいくつかのクラスやリソースが含まれている可能性があります。
+このJavaクラスが所属するパッケージを宣言しています。`com.example.app`はアプリケーションの名前空間を示しており、このパッケージの中には`FileListActivity`の他にもいくつかのクラスやリソースが含まれている可能性があります。
 
 ### インポート宣言
-
-以下の部分は、このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。
 
 ```java
 import android.content.Intent;
@@ -801,20 +798,16 @@ import java.util.HashMap;
 import java.util.Map;
 ```
 
-これらのインポート宣言により、ソースコード内でこれらのクラスやインターフェースを完全修飾名を使用せずに参照することができます。
+このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。
 
 ### クラス宣言
-
-```java
-public class FileListActivity extends AppCompatActivity {
-```
 
 `FileListActivity`は、アプリ内のファイル一覧を表示するアクティビティです。このクラスはAndroidの`AppCompatActivity`を継承しているため、AndroidのライフサイクルメソッドやUI関連の機能を利用することができます。
 
 ### インスタンス変数
 
 ```java
-private LinearLayout buttonContainer; // 動画ボタンを格納するコンテナ
+private LinearLayout buttonContainer;
 private TextView headerTextView;
 ```
 
@@ -822,7 +815,7 @@ private TextView headerTextView;
 
 ### `onCreate`メソッド
 
-このメソッドは、アクティビティのインスタンスが生成される際にシステムから呼び出されます。基本的な初期化やUIのセットアップをこのメソッド内で行います。
+アクティビティのインスタンスが生成される際にシステムから呼び出されるメソッドで、UIのセットアップや初期化を行います。
 
 ### ボタンリスナーの設定
 
@@ -838,7 +831,7 @@ private void setButtonListeners() { ... }
 private void setBottomNavigationListener(BottomNavigationView bottomNav) { ... }
 ```
 
-このメソッドでは、ボトムナビゲーションの各アイテムが選択されたときの動作を定義しています。
+ボトムナビゲーションの各アイテムが選択されたときの動作をこのメソッドで定義しています。
 
 ### ボタンテキストの更新
 
@@ -846,7 +839,7 @@ private void setBottomNavigationListener(BottomNavigationView bottomNav) { ... }
 private void updateButtonText() { ... }
 ```
 
-このメソッドでは、各動画のボタンのテキストを更新しています。動画のカテゴリ名と動画名を組み合わせて、ボタンのテキストとして設定しています。
+各動画のボタンのテキストをこのメソッドで更新しています。動画のカテゴリ名と動画名を組み合わせて、ボタンのテキストとして設定しています。
 
 ### `FileViewer`の起動
 
@@ -854,7 +847,7 @@ private void updateButtonText() { ... }
 private void openFileViewer(String parameter) { ... }
 ```
 
-このメソッドでは、指定されたパラメータに基づいて`MainActivity`を起動しています。パラメータは、動画のURLを決定するためのキーとして使用されます。
+指定されたパラメータに基づいて`MainActivity`を起動するこのメソッドでは、パラメータは動画のURLを決定するためのキーとして使用されます。
 
 <div style="page-break-after: always;"></div>
 

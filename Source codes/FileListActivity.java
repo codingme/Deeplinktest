@@ -109,12 +109,8 @@ public class FileListActivity extends AppCompatActivity {
     // 指定したパラメータに基づいてFileViewerを開くメソッド
     private void openFileViewer(String parameter) {
         Intent intent = new Intent(this, MainActivity.class);
-        Map<String, String> urlMap = new HashMap<>();
-        urlMap.put("123", "http://example.com");
-        urlMap.put("456", "file:///android_asset/YouTube.html");
-        urlMap.put("789", "file:///android_asset/example_com.html");
 
-        String url = urlMap.get(parameter);
+        String url = UrlMappingHelper.getUrl(parameter);
         if (url != null) {
             intent.putExtra("URL", url);
             startActivity(intent);
