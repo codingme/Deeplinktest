@@ -367,6 +367,7 @@ code {
   </script>
 <h1 id="%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">アプリケーションドキュメンテーション</h1>
 <ul>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">アプリケーションドキュメンテーション</a></li>
 <li><a href="#%E3%83%87%E3%83%A2%E3%81%AE%E6%89%8B%E9%A0%86">デモの手順</a></li>
 <li><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E6%A6%82%E8%A6%81%E8%AA%AC%E6%98%8E">ソースコードの概要説明</a>
 <ul>
@@ -379,8 +380,9 @@ code {
 <li><a href="#7-androidmanifestxmlsrcmainres">7. <code>AndroidManifest.xml</code>(src/main/res)</a></li>
 <li><a href="#8-youtubehtml%E3%81%A8example_comhtmlsrcmainassets">8. <code>YouTube.html</code>と<code>example_com.html</code>(src/main/assets)</a></li>
 <li><a href="#9-filelistactivityjavasrcmainjavacomexampleapp">9. <code>FileListActivity.java</code>(src/main/java/com/example/app)</a></li>
-<li><a href="#10-settingsfragmentjavasrcmainjavacomexampleapp">10. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</a></li>
-<li><a href="#11-activity_file_listxmlsrcmainreslayout">11. <code>activity_file_list.xml</code>(src/main/res/layout)</a></li>
+<li><a href="#10-fileviewerfragmentjavasrcmainjavacomexampleapp">10. <code>FileViewerFragment.java</code>(src/main/java/com/example/app)</a></li>
+<li><a href="#11-urlmappinghelperjavasrcmainjavacomexampleapp">11. <code>UrlMappingHelper.java</code>(src/main/java/com/example/app)</a></li>
+<li><a href="#12-activity_file_listxmlsrcmainreslayout">12. <code>activity_file_list.xml</code>(src/main/res/layout)</a></li>
 </ul>
 </li>
 <li><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E">ソースコードの詳細説明</a>
@@ -430,23 +432,22 @@ code {
 <li><a href="#oncreate%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreate</code>メソッド</a>
 <ul>
 <li><a href="#51-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E5%88%9D%E6%9C%9F%E5%8C%96">5.1. 基本的な初期化</a></li>
-<li><a href="#52-webview%E3%81%AE%E8%A8%AD%E5%AE%9A">5.2. WebViewの設定</a></li>
-<li><a href="#53-%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%81%A8%E5%8B%95%E7%94%BB%E5%90%8D%E3%81%AE%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.3. カテゴリと動画名の表示部分の初期化</a></li>
-<li><a href="#54-intent%E3%81%8B%E3%82%89%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%96%E5%BE%97">5.4. Intentからのデータ取得</a></li>
-<li><a href="#55-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.5. ボトムナビゲーションの初期化</a></li>
-<li><a href="#56-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%AE%E6%BA%96%E5%82%99">5.6. シャットダウンの準備</a></li>
-<li><a href="#57-%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86%E3%81%AE%E8%A8%AD%E5%AE%9A">5.7. ヘッダー部分の設定</a></li>
-<li><a href="#58-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC">5.8. ボトムナビゲーションのイベントリスナー</a></li>
+<li><a href="#52-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%90%E3%83%BC%E3%81%AE%E9%9D%9E%E8%A1%A8%E7%A4%BA%E8%A8%AD%E5%AE%9A">5.2. アクションバーの非表示設定</a></li>
+<li><a href="#53-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%AE%E6%BA%96%E5%82%99">5.3. シャットダウンの準備</a></li>
+<li><a href="#54-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%A8%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC">5.4. ボトムナビゲーションの初期化とイベントリスナー</a></li>
+<li><a href="#55-%E7%94%BB%E9%9D%A2%E3%81%AE%E5%90%91%E3%81%8D%E3%81%AB%E5%BF%9C%E3%81%98%E3%81%A6%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E8%AA%BF%E6%95%B4">5.5. 画面の向きに応じてビューの調整</a></li>
 </ul>
 </li>
 <li><a href="#%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">アクティビティのライフサイクルメソッド</a>
 <ul>
-<li><a href="#510-onpause">5.10. <code>onPause()</code></a></li>
-<li><a href="#511-onresume">5.11. <code>onResume()</code></a></li>
+<li><a href="#56-onconfigurationchanged">5.6. <code>onConfigurationChanged</code></a></li>
+<li><a href="#57-onpause">5.7. <code>onPause()</code></a></li>
+<li><a href="#58-onresume">5.8. <code>onResume()</code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a href="#"></a></li>
 <li><a href="#6-settingsfragment">6. <code>SettingsFragment</code></a>
 <ul>
 <li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E6%A6%82%E8%A6%81">クラスの概要</a></li>
@@ -492,7 +493,29 @@ code {
 <li><a href="#oncreateview-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89-1"><code>onCreateView</code> メソッド</a></li>
 </ul>
 </li>
-<li><a href="#11-activity_file_listxml">11. <code>activity_file_list.xml</code></a>
+<li><a href="#11-fileviewerfragmentjava">11. <code>FileViewerFragment.java</code></a>
+<ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80-3">パッケージ宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80-3">インポート宣言</a></li>
+<li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80-3">クラス宣言</a></li>
+<li><a href="#oncreateview%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreateView</code>メソッド</a></li>
+<li><a href="#onviewcreated%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onViewCreated</code>メソッド</a></li>
+<li><a href="#onconfigurationchanged%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onConfigurationChanged</code>メソッド</a></li>
+<li><a href="#adjustviewsfororientation%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>adjustViewsForOrientation</code>メソッド</a></li>
+</ul>
+</li>
+<li><a href="#12-urlmappinghelperjava">12. <code>UrlMappingHelper.java</code></a>
+<ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80-4">パッケージ宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80-4">インポート宣言</a></li>
+<li><a href="#%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80-4">クラス宣言</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0-2">インスタンス変数</a></li>
+<li><a href="#%E9%9D%99%E7%9A%84%E5%88%9D%E6%9C%9F%E5%8C%96%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF">静的初期化ブロック</a></li>
+<li><a href="#%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF">プライベートコンストラクタ</a></li>
+<li><a href="#geturl%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>getUrl</code>メソッド</a></li>
+</ul>
+</li>
+<li><a href="#13-activity_file_listxml">13. <code>activity_file_list.xml</code></a>
 <ul>
 <li><a href="#%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86-2">ヘッダー部分</a></li>
 <li><a href="#%E5%8B%95%E7%94%BB%E3%83%9C%E3%82%BF%E3%83%B3%E9%83%A8%E5%88%86-1">動画ボタン部分</a></li>
@@ -514,17 +537,17 @@ code {
 </ol>
 <div style="page-break-after: always;"></div>
 <h1 id="%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E6%A6%82%E8%A6%81%E8%AA%AC%E6%98%8E">ソースコードの概要説明</h1>
-<p>今回の成果物となるソースコードは、大きく8つです。各ファイルの詳細を以下に示します。ファイル名の後に、Android Studio内でどこのディレクトリに保存されているかを記載しています。</p>
+<p>今回の成果物となるソースコードは、大きく12つです。各ファイルの詳細を以下に示します。ファイル名の後に、Android Studio内でどこのディレクトリに保存されているかを記載しています。</p>
 <h3 id="1-indexhtmlweb%E3%83%9A%E3%83%BC%E3%82%B8%E7%94%A8">1. <code>index.html</code>(Webページ用)</h3>
 <p>このHTMLファイルはアプリケーションのデモ用のWebページを表しています。4つのDeepLink（<code>myapp://dda.io/view/file/123</code>、<code>myapp://dda.io/view/file/456</code>、<code>myapp://dda.io/view/file/789</code>、<code>myapp://dda.io/view/folders/123</code>）がそれぞれ異なるリンクとして記述されています。これらのリンクはアプリケーションがインストールされていない場合に、APKファイルのダウンロードリンクを表示するポップアップを表示します。</p>
 <h3 id="2-activitymainxmlsrcmainreslayout">2. <code>activity_main.xml</code>(src/main/res/layout)</h3>
-<p>このXMLファイルはアプリケーションのメイン画面のレイアウトを定義しています。WebView、ヘッダー(戻るボタンとカテゴリ名)、動画名、ファイルビューア、設定の各部分がレイアウトに含まれています。</p>
+<p>このXMLファイルはアプリケーションのメイン画面のレイアウトを定義しています。ヘッダー(戻るボタンとカテゴリ名)、動画名、設定の各部分がレイアウトに含まれています。</p>
 <h3 id="3-bottomnavmenumainxml%E3%81%A8bottomnavmenufilelistxmlsrcmainresmenu">3. <code>bottom_nav_menu_main.xmlとbottom_nav_menu_file_list.xml</code>(src/main/res/menu)</h3>
 <p>アプリのボトムナビゲーションメニューの項目を定義するXMLファイル。ビューアと設定(file_listでは一覧と設定)の2つのメニューアイテムが含まれています。</p>
 <h3 id="4-fragmentsettingsxmlsrcmainreslayout">4. <code>fragment_settings.xml</code>(src/main/res/layout)</h3>
 <p>アプリ内の「設定」セクションのレイアウトを定義するXMLファイル。アプリのバージョン情報とフリーテキスト入力欄を表示するためのレイアウトが含まれています。</p>
 <h3 id="5-mainactivityjavasrcmainjavacomexampleapp">5. <code>MainActivity.java</code>(src/main/java/com/example/app)</h3>
-<p>このJavaファイルはアプリケーションのメインアクティビティを定義しています。ここではDeepLinkからのパラメータを取得し、対応するURLをWebViewにロードします。また、アプリがバックグラウンドに移行してから10分後にアプリを自動的に終了する機能も実装されています。</p>
+<p>このJavaファイルはアプリケーションのメインアクティビティを定義しています。ここではBottomNavigationViewを用いて<code>FileViewerFragment</code>や<code>SettingsFragment</code>への遷移を制御しています。また、アプリがバックグラウンドに移行してから10分後にアプリを自動的に終了する機能も実装されています。</p>
 <h3 id="6-settingsfragmentjavasrcmainjavacomexampleapp">6. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</h3>
 <p>アプリの設定画面を表示するフラグメントのJavaファイル。レイアウトは<code>fragment_settings.xml</code>によって定義されています。</p>
 <h3 id="7-androidmanifestxmlsrcmainres">7. <code>AndroidManifest.xml</code>(src/main/res)</h3>
@@ -533,9 +556,11 @@ code {
 <p>これらのHTMLファイルはそれぞれ、YouTubeの動画と<code>example.com</code>のWebページを表示するためのiframeを含んでいます。これらのファイルはアプリケーション内部でローカルに保存され、DeepLinkからのパラメータにより特定のURLをWebViewにロードします。</p>
 <h3 id="9-filelistactivityjavasrcmainjavacomexampleapp">9. <code>FileListActivity.java</code>(src/main/java/com/example/app)</h3>
 <p>このJavaファイルは、アプリケーション内でファイルのリストを表示するアクティビティを定義しています。このアクティビティは、ユーザーが利用可能なファイルやフォルダを一覧表示し、選択することで詳細を閲覧できるように設計されています。</p>
-<h3 id="10-settingsfragmentjavasrcmainjavacomexampleapp">10. <code>SettingsFragment.java</code>(src/main/java/com/example/app)</h3>
-<p><code>SettingsFragment.java</code>は、アプリケーションの設定を表示および編集するためのフラグメントを定義しています。このフラグメントは、ユーザーがアプリケーションの振る舞いや表示をカスタマイズするためのオプションを提供します。</p>
-<h3 id="11-activityfilelistxmlsrcmainreslayout">11. <code>activity_file_list.xml</code>(src/main/res/layout)</h3>
+<h3 id="10-fileviewerfragmentjavasrcmainjavacomexampleapp">10. <code>FileViewerFragment.java</code>(src/main/java/com/example/app)</h3>
+<p><code>FileViewerFragment.java</code>は、WebViewを利用して特定のURLを表示するフラグメントを定義しています。DeepLinkからのパラメータを取得し、対応するURLをWebViewにロードします。</p>
+<h3 id="11-urlmappinghelperjavasrcmainjavacomexampleapp">11. <code>UrlMappingHelper.java</code>(src/main/java/com/example/app)</h3>
+<p>このJavaファイルは、DeepLinkのパラメータとそれに対応するURLをマッピングするヘルパークラスです。特定のキーに対応するURLを返す<code>getUrl</code>メソッドが実装されています。</p>
+<h3 id="12-activityfilelistxmlsrcmainreslayout">12. <code>activity_file_list.xml</code>(src/main/res/layout)</h3>
 <p>このXMLファイルは、<code>FileListActivity.java</code>で使用されるレイアウトを定義しています。ヘッダー部分、動画ボタン部分、設定画面を表示するためのコンテナ、およびボトムナビゲーション部分を含んでいます。各部分は、ユーザーがファイルやフォルダを効率的に閲覧・選択できるようにデザインされています。</p>
 <div style="page-break-after: always;"></div>
 <h1 id="%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A9%B3%E7%B4%B0%E8%AA%AC%E6%98%8E">ソースコードの詳細説明</h1>
@@ -735,20 +760,14 @@ code {
 </div></code></pre>
 <p>この行は、このJavaクラスが所属するパッケージを宣言しています。<code>com.example.app</code>はアプリケーションの名前空間を示しており、このパッケージの中には<code>MainActivity</code>の他にもいくつかのクラスやリソースが含まれている可能性があります。</p>
 <h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
-<pre class="hljs"><code><div><span class="hljs-keyword">import</span> androidx.appcompat.app.AppCompatActivity;
-<span class="hljs-keyword">import</span> android.content.Intent;
-<span class="hljs-keyword">import</span> android.graphics.Color;
-<span class="hljs-keyword">import</span> android.net.Uri;
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> android.content.Intent;
+<span class="hljs-keyword">import</span> android.content.res.Configuration;
 <span class="hljs-keyword">import</span> android.os.Bundle;
 <span class="hljs-keyword">import</span> android.os.Handler;
 <span class="hljs-keyword">import</span> android.view.View;
-<span class="hljs-keyword">import</span> android.webkit.WebSettings;
-<span class="hljs-keyword">import</span> android.webkit.WebView;
-<span class="hljs-keyword">import</span> android.widget.LinearLayout;
-<span class="hljs-keyword">import</span> android.widget.TextView;
+<span class="hljs-keyword">import</span> androidx.appcompat.app.AppCompatActivity;
 <span class="hljs-keyword">import</span> com.google.android.material.bottomnavigation.BottomNavigationView;
-<span class="hljs-keyword">import</span> java.util.HashMap;
-<span class="hljs-keyword">import</span> java.util.Map;
+<span class="hljs-keyword">import</span> android.net.Uri;
 </div></code></pre>
 <p>以下の部分は、このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。</p>
 <h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
@@ -772,28 +791,13 @@ code {
 setContentView(R.layout.activity_main);
 </div></code></pre>
 <p>上記のコードで、親クラスの<code>onCreate</code>メソッドを呼び出し、UIのレイアウトを設定しています。</p>
-<h4 id="52-webview%E3%81%AE%E8%A8%AD%E5%AE%9A">5.2. WebViewの設定</h4>
-<pre class="hljs"><code><div>WebView webView = findViewById(R.id.webview);
-WebSettings webSettings = webView.getSettings();
-webSettings.setJavaScriptEnabled(<span class="hljs-keyword">true</span>);
+<h4 id="52-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%90%E3%83%BC%E3%81%AE%E9%9D%9E%E8%A1%A8%E7%A4%BA%E8%A8%AD%E5%AE%9A">5.2. アクションバーの非表示設定</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (getSupportActionBar() != <span class="hljs-keyword">null</span>) {
+    getSupportActionBar().hide();
+}
 </div></code></pre>
-<p>上記のコードで、<code>WebView</code>のインスタンスを取得し、JavaScriptを有効にしています。</p>
-<h4 id="53-%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%81%A8%E5%8B%95%E7%94%BB%E5%90%8D%E3%81%AE%E8%A1%A8%E7%A4%BA%E9%83%A8%E5%88%86%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.3. カテゴリと動画名の表示部分の初期化</h4>
-<pre class="hljs"><code><div>TextView categoryTextView = findViewById(R.id.fileViewer);
-TextView videoNameTextView = findViewById(R.id.parameter);
-</div></code></pre>
-<p>この部分で、<code>TextView</code>のインスタンスを取得しています。</p>
-<h4 id="54-intent%E3%81%8B%E3%82%89%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%96%E5%BE%97">5.4. Intentからのデータ取得</h4>
-<pre class="hljs"><code><div>Intent intent = getIntent();
-String action = intent.getAction();
-Uri data = intent.getData();
-</div></code></pre>
-<p>この部分で、アクティビティが開始されたときの<code>Intent</code>からデータを取得しています。</p>
-<h4 id="55-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96">5.5. ボトムナビゲーションの初期化</h4>
-<pre class="hljs"><code><div>BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-</div></code></pre>
-<p>ボトムナビゲーションのインスタンスを取得しています。</p>
-<h4 id="56-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%AE%E6%BA%96%E5%82%99">5.6. シャットダウンの準備</h4>
+<p>アプリケーションのアクションバーを非表示にしています。</p>
+<h4 id="53-%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3%E3%81%AE%E6%BA%96%E5%82%99">5.3. シャットダウンの準備</h4>
 <pre class="hljs"><code><div>handler = <span class="hljs-keyword">new</span> Handler();
 shutdownRunnable = <span class="hljs-keyword">new</span> Runnable() {
     <span class="hljs-meta">@Override</span>
@@ -803,19 +807,27 @@ shutdownRunnable = <span class="hljs-keyword">new</span> Runnable() {
 };
 </div></code></pre>
 <p>アプリがバックグラウンドに移行した後のシャットダウンのための準備をしています。</p>
-<h4 id="57-%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86%E3%81%AE%E8%A8%AD%E5%AE%9A">5.7. ヘッダー部分の設定</h4>
-<pre class="hljs"><code><div>LinearLayout header = findViewById(R.id.header);
-header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</span>));
-</div></code></pre>
-<p>ヘッダー部分の背景色を設定しています。</p>
-<h4 id="58-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC">5.8. ボトムナビゲーションのイベントリスナー</h4>
-<pre class="hljs"><code><div>bottomNav.setOnNavigationItemSelectedListener(item -&gt; {
+<h4 id="54-%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%A8%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC">5.4. ボトムナビゲーションの初期化とイベントリスナー</h4>
+<pre class="hljs"><code><div>BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+bottomNav.setOnNavigationItemSelectedListener(item -&gt; {
     ...
 });
 </div></code></pre>
-<p>ボトムナビゲーションの各アイテムが選択されたときの動作を定義しています。</p>
+<p>ボトムナビゲーションのインスタンスを取得し、各アイテムが選択されたときの動作を定義しています。</p>
+<h4 id="55-%E7%94%BB%E9%9D%A2%E3%81%AE%E5%90%91%E3%81%8D%E3%81%AB%E5%BF%9C%E3%81%98%E3%81%A6%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E8%AA%BF%E6%95%B4">5.5. 画面の向きに応じてビューの調整</h4>
+<pre class="hljs"><code><div>adjustViewsForOrientation(getResources().getConfiguration().orientation);
+</div></code></pre>
+<p>画面の向きに応じてビューの表示を調整するメソッドを呼び出しています。</p>
 <h3 id="%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">アクティビティのライフサイクルメソッド</h3>
-<h4 id="510-onpause">5.10. <code>onPause()</code></h4>
+<h4 id="56-onconfigurationchanged">5.6. <code>onConfigurationChanged</code></h4>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onConfigurationChanged</span><span class="hljs-params">(Configuration newConfig)</span> </span>{
+    <span class="hljs-keyword">super</span>.onConfigurationChanged(newConfig);
+    adjustViewsForOrientation(newConfig.orientation);
+}
+</div></code></pre>
+<p>デバイスの画面の向きが変わったときに呼ばれるメソッドです。画面の向きに応じてビューを調整します。</p>
+<h4 id="57-onpause">5.7. <code>onPause()</code></h4>
 <pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
 <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPause</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">super</span>.onPause();
@@ -823,7 +835,7 @@ header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</
 }
 </div></code></pre>
 <p>アクティビティがバックグラウンドに移動するときに呼ばれるメソッドです。</p>
-<h4 id="511-onresume">5.11. <code>onResume()</code></h4>
+<h4 id="58-onresume">5.8. <code>onResume()</code></h4>
 <pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
 <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResume</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">super</span>.onResume();
@@ -831,7 +843,7 @@ header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</
 }
 </div></code></pre>
 <p>アクティビティがフォアグラウンドに戻るときに呼ばれるメソッドです。</p>
-<div style="page-break-after: always;"></div>
+<h2 id="div-style%22page-break-after-always%22div"><div style="page-break-after: always;"></div></h2>
 <h2 id="6-settingsfragment">6. <code>SettingsFragment</code></h2>
 <hr>
 <p><code>SettingsFragment</code>は、設定画面を表示するためのフラグメントであり、UIのレイアウトは<code>fragment_settings.xml</code>ファイルに定義されています。このクラスはシンプルですが、アプリケーションの設定や情報を表示するための基本的な機能を持っています。</p>
@@ -966,13 +978,11 @@ header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</
 <p><code>example_com.html</code>は、基本的な構造とスタイルが<code>YouTube.html</code>と同一です。唯一の違いは、<code>&lt;iframe&gt;</code>の<code>src</code>属性が<code>https://www.youtube.com/embed/bjmBJ1Fl0cs?autoplay=1</code>から<code>http://example.com</code>に変更されている点です。このことから、<code>example_com.html</code>は<code>http://example.com</code>のページ内容を埋め込むためのものとして機能します。</p>
 <div style="page-break-after: always;"></div>
 <h2 id="9-filelistactivityjava">9. <code>FileListActivity.java</code></h2>
-<hr>
 <h3 id="%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</h3>
 <pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
 </div></code></pre>
-<p>この行は、このJavaクラスが所属するパッケージを宣言しています。<code>com.example.app</code>はアプリケーションの名前空間を示しており、このパッケージの中には<code>FileListActivity</code>の他にもいくつかのクラスやリソースが含まれている可能性があります。</p>
+<p>このJavaクラスが所属するパッケージを宣言しています。<code>com.example.app</code>はアプリケーションの名前空間を示しており、このパッケージの中には<code>FileListActivity</code>の他にもいくつかのクラスやリソースが含まれている可能性があります。</p>
 <h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
-<p>以下の部分は、このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。</p>
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> android.content.Intent;
 <span class="hljs-keyword">import</span> android.net.Uri;
 <span class="hljs-keyword">import</span> android.os.Bundle;
@@ -989,18 +999,16 @@ header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</
 <span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
 </div></code></pre>
-<p>これらのインポート宣言により、ソースコード内でこれらのクラスやインターフェースを完全修飾名を使用せずに参照することができます。</p>
+<p>このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。</p>
 <h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
-<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileListActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>{
-</div></code></pre>
 <p><code>FileListActivity</code>は、アプリ内のファイル一覧を表示するアクティビティです。このクラスはAndroidの<code>AppCompatActivity</code>を継承しているため、AndroidのライフサイクルメソッドやUI関連の機能を利用することができます。</p>
 <h3 id="%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0">インスタンス変数</h3>
-<pre class="hljs"><code><div><span class="hljs-keyword">private</span> LinearLayout buttonContainer; <span class="hljs-comment">// 動画ボタンを格納するコンテナ</span>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> LinearLayout buttonContainer;
 <span class="hljs-keyword">private</span> TextView headerTextView;
 </div></code></pre>
 <p><code>buttonContainer</code>は動画のボタン一覧を格納する<code>LinearLayout</code>を参照します。<code>headerTextView</code>はヘッダー部分のテキストを表示する<code>TextView</code>を参照します。</p>
 <h3 id="oncreate%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreate</code>メソッド</h3>
-<p>このメソッドは、アクティビティのインスタンスが生成される際にシステムから呼び出されます。基本的な初期化やUIのセットアップをこのメソッド内で行います。</p>
+<p>アクティビティのインスタンスが生成される際にシステムから呼び出されるメソッドで、UIのセットアップや初期化を行います。</p>
 <h3 id="%E3%83%9C%E3%82%BF%E3%83%B3%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E3%81%AE%E8%A8%AD%E5%AE%9A">ボタンリスナーの設定</h3>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setButtonListeners</span><span class="hljs-params">()</span> </span>{ ... }
 </div></code></pre>
@@ -1008,15 +1016,15 @@ header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</
 <h3 id="%E3%83%9C%E3%83%88%E3%83%A0%E3%83%8A%E3%83%93%E3%82%B2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E8%A8%AD%E5%AE%9A">ボトムナビゲーションのリスナー設定</h3>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBottomNavigationListener</span><span class="hljs-params">(BottomNavigationView bottomNav)</span> </span>{ ... }
 </div></code></pre>
-<p>このメソッドでは、ボトムナビゲーションの各アイテムが選択されたときの動作を定義しています。</p>
+<p>ボトムナビゲーションの各アイテムが選択されたときの動作をこのメソッドで定義しています。</p>
 <h3 id="%E3%83%9C%E3%82%BF%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E6%9B%B4%E6%96%B0">ボタンテキストの更新</h3>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateButtonText</span><span class="hljs-params">()</span> </span>{ ... }
 </div></code></pre>
-<p>このメソッドでは、各動画のボタンのテキストを更新しています。動画のカテゴリ名と動画名を組み合わせて、ボタンのテキストとして設定しています。</p>
+<p>各動画のボタンのテキストをこのメソッドで更新しています。動画のカテゴリ名と動画名を組み合わせて、ボタンのテキストとして設定しています。</p>
 <h3 id="fileviewer%E3%81%AE%E8%B5%B7%E5%8B%95"><code>FileViewer</code>の起動</h3>
 <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openFileViewer</span><span class="hljs-params">(String parameter)</span> </span>{ ... }
 </div></code></pre>
-<p>このメソッドでは、指定されたパラメータに基づいて<code>MainActivity</code>を起動しています。パラメータは、動画のURLを決定するためのキーとして使用されます。</p>
+<p>指定されたパラメータに基づいて<code>MainActivity</code>を起動するこのメソッドでは、パラメータは動画のURLを決定するためのキーとして使用されます。</p>
 <div style="page-break-after: always;"></div>
 <hr>
 <h2 id="10-settingsfragmentjava">10. <code>SettingsFragment.java</code></h2>
@@ -1052,7 +1060,72 @@ header.setBackgroundColor(Color.parseColor(<span class="hljs-string">"#FF5733"</
 </div></code></pre>
 <p><code>onCreateView</code>はフラグメントのライフサイクルにおいてUIが初めて描画される際にシステムから呼び出されるメソッドです。このメソッド内で、フラグメントのUIがインフレートされ、そのルートビューが返されます。この例では、<code>fragment_settings.xml</code>がインフレートされています。</p>
 <div style="page-break-after: always;"></div>
-<h2 id="11-activityfilelistxml">11. <code>activity_file_list.xml</code></h2>
+<h2 id="11-fileviewerfragmentjava">11. <code>FileViewerFragment.java</code></h2>
+<hr>
+<h3 id="%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+</div></code></pre>
+<p>この行は、このJavaクラスが所属するパッケージを宣言しています。このパッケージ内には、<code>FileViewerFragment</code>をはじめとする様々なクラスやリソースが含まれる可能性があります。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
+<p>各種ライブラリやフレームワークのクラスを利用するためのインポート文です。</p>
+<h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileViewerFragment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Fragment</span> </span>{
+</div></code></pre>
+<p>この行は、<code>FileViewerFragment</code>という名前の新しいクラスを宣言しています。このクラスはAndroidの<code>Fragment</code>を拡張しています。</p>
+<h3 id="oncreateview%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onCreateView</code>メソッド</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@Nullable</span>
+<span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">onCreateView</span><span class="hljs-params">(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>{
+    ...
+}
+</div></code></pre>
+<p>このメソッドは、フラグメントのUIを生成するためにシステムによって呼び出されます。ここでは、<code>fragment_file_viewer</code>というレイアウトリソースをインフレートしています。</p>
+<h3 id="onviewcreated%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onViewCreated</code>メソッド</h3>
+<p>このメソッドは、フラグメントのビューが作成された後にシステムによって呼び出されます。ここでの主な処理は、WebViewの設定やIntentからのデータ取得、ボタンのクリックリスナー設定などです。</p>
+<h3 id="onconfigurationchanged%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>onConfigurationChanged</code>メソッド</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onConfigurationChanged</span><span class="hljs-params">(@NonNull Configuration newConfig)</span> </span>{
+    ...
+}
+</div></code></pre>
+<p>デバイスの設定（例：画面の向き）が変更されたときに呼ばれるメソッドです。このメソッド内で、画面の向きに応じてビューの表示を調整する<code>adjustViewsForOrientation</code>メソッドを呼び出しています。</p>
+<h3 id="adjustviewsfororientation%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>adjustViewsForOrientation</code>メソッド</h3>
+<p>このプライベートメソッドは、画面の向きに応じてビューの表示を調整するためのものです。例えば、画面がランドスケープモードの場合、一部のビューを非表示にしたり、逆にポートレートモードの場合は表示したりしています。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="12-urlmappinghelperjava">12. <code>UrlMappingHelper.java</code></h2>
+<hr>
+<h3 id="%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%AE%A3%E8%A8%80">パッケージ宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> com.example.app;
+</div></code></pre>
+<p>この行は、このJavaクラスが所属するパッケージを宣言しています。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E5%AE%A3%E8%A8%80">インポート宣言</h3>
+<p>このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。ここでは、<code>HashMap</code>や<code>Map</code>をインポートしています。</p>
+<h3 id="%E3%82%AF%E3%83%A9%E3%82%B9%E5%AE%A3%E8%A8%80">クラス宣言</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UrlMappingHelper</span> </span>{
+</div></code></pre>
+<p>この行は、<code>UrlMappingHelper</code>という名前の新しいクラスを宣言しています。このクラスはDeepLinkのパラメータから対応するURLを取得するためのヘルパークラスとして機能します。</p>
+<h3 id="%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%A4%89%E6%95%B0">インスタンス変数</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Map&lt;String, String&gt; URL_MAP = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+</div></code></pre>
+<p>この行は、DeepLinkのパラメータと対応するURLをマッピングするための静的なマップを宣言しています。</p>
+<h3 id="%E9%9D%99%E7%9A%84%E5%88%9D%E6%9C%9F%E5%8C%96%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF">静的初期化ブロック</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">static</span> {
+    ...
+}
+</div></code></pre>
+<p>この部分は、静的初期化ブロックとして、クラスがロードされるときに一度だけ実行されるコードブロックです。ここでは、<code>URL_MAP</code>にパラメータと対応するURLのマッピングを追加しています。</p>
+<h3 id="%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF">プライベートコンストラクタ</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">UrlMappingHelper</span><span class="hljs-params">()</span> </span>{}
+</div></code></pre>
+<p>この行は、このクラスのインスタンス化を防ぐためのプライベートコンストラクタを宣言しています。</p>
+<h3 id="geturl%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89"><code>getUrl</code>メソッド</h3>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">getUrl</span><span class="hljs-params">(String key)</span> </span>{
+    ...
+}
+</div></code></pre>
+<p>このメソッドは、指定されたキーに対応するURLを<code>URL_MAP</code>から取得して返します。</p>
+<div style="page-break-after: always;"></div>
+<h2 id="13-activityfilelistxml">13. <code>activity_file_list.xml</code></h2>
 <hr>
 <p>このレイアウトは、アプリケーション内で利用可能な動画のリストを表示する画面の基盤となるレイアウトです。</p>
 <h3 id="%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E9%83%A8%E5%88%86">ヘッダー部分</h3>
