@@ -12,8 +12,9 @@
     - [7. `AndroidManifest.xml`(src/main/res)](#7-androidmanifestxmlsrcmainres)
     - [8. `YouTube.html`と`example_com.html`(src/main/assets)](#8-youtubehtmlとexample_comhtmlsrcmainassets)
     - [9. `FileListActivity.java`(src/main/java/com/example/app)](#9-filelistactivityjavasrcmainjavacomexampleapp)
-    - [10. `SettingsFragment.java`(src/main/java/com/example/app)](#10-settingsfragmentjavasrcmainjavacomexampleapp)
-    - [11. `activity_file_list.xml`(src/main/res/layout)](#11-activity_file_listxmlsrcmainreslayout)
+    - [10. `FileViewerFragment.java`(src/main/java/com/example/app)](#10-fileviewerfragmentjavasrcmainjavacomexampleapp)
+    - [11. `UrlMappingHelper.java`(src/main/java/com/example/app)](#11-urlmappinghelperjavasrcmainjavacomexampleapp)
+    - [12. `activity_file_list.xml`(src/main/res/layout)](#12-activity_file_listxmlsrcmainreslayout)
 - [ソースコードの詳細説明](#ソースコードの詳細説明)
   - [1. `index.html`](#1-indexhtml)
     - [ヘッダー部分](#ヘッダー部分)
@@ -43,16 +44,15 @@
     - [インスタンス変数](#インスタンス変数)
     - [`onCreate`メソッド](#oncreateメソッド)
       - [5.1. 基本的な初期化](#51-基本的な初期化)
-      - [5.2. WebViewの設定](#52-webviewの設定)
-      - [5.3. カテゴリと動画名の表示部分の初期化](#53-カテゴリと動画名の表示部分の初期化)
-      - [5.4. Intentからのデータ取得](#54-intentからのデータ取得)
-      - [5.5. ボトムナビゲーションの初期化](#55-ボトムナビゲーションの初期化)
-      - [5.6. シャットダウンの準備](#56-シャットダウンの準備)
-      - [5.7. ヘッダー部分の設定](#57-ヘッダー部分の設定)
-      - [5.8. ボトムナビゲーションのイベントリスナー](#58-ボトムナビゲーションのイベントリスナー)
+      - [5.2. アクションバーの非表示設定](#52-アクションバーの非表示設定)
+      - [5.3. シャットダウンの準備](#53-シャットダウンの準備)
+      - [5.4. ボトムナビゲーションの初期化とイベントリスナー](#54-ボトムナビゲーションの初期化とイベントリスナー)
+      - [5.5. 画面の向きに応じてビューの調整](#55-画面の向きに応じてビューの調整)
     - [アクティビティのライフサイクルメソッド](#アクティビティのライフサイクルメソッド)
-      - [5.10. `onPause()`](#510-onpause)
-      - [5.11. `onResume()`](#511-onresume)
+      - [5.6. `onConfigurationChanged`](#56-onconfigurationchanged)
+      - [5.7. `onPause()`](#57-onpause)
+      - [5.8. `onResume()`](#58-onresume)
+  - [](#)
   - [6. `SettingsFragment`](#6-settingsfragment)
     - [クラスの概要](#クラスの概要)
     - [コンストラクタ](#コンストラクタ)
@@ -83,7 +83,23 @@
     - [クラス宣言](#クラス宣言-2)
     - [コンストラクタ](#コンストラクタ-1)
     - [`onCreateView` メソッド](#oncreateview-メソッド-1)
-  - [11. `activity_file_list.xml`](#11-activity_file_listxml)
+  - [11. `FileViewerFragment.java`](#11-fileviewerfragmentjava)
+    - [パッケージ宣言](#パッケージ宣言-3)
+    - [インポート宣言](#インポート宣言-3)
+    - [クラス宣言](#クラス宣言-3)
+    - [`onCreateView`メソッド](#oncreateviewメソッド)
+    - [`onViewCreated`メソッド](#onviewcreatedメソッド)
+    - [`onConfigurationChanged`メソッド](#onconfigurationchangedメソッド)
+    - [`adjustViewsForOrientation`メソッド](#adjustviewsfororientationメソッド)
+  - [12. `UrlMappingHelper.java`](#12-urlmappinghelperjava)
+    - [パッケージ宣言](#パッケージ宣言-4)
+    - [インポート宣言](#インポート宣言-4)
+    - [クラス宣言](#クラス宣言-4)
+    - [インスタンス変数](#インスタンス変数-2)
+    - [静的初期化ブロック](#静的初期化ブロック)
+    - [プライベートコンストラクタ](#プライベートコンストラクタ)
+    - [`getUrl`メソッド](#geturlメソッド)
+  - [13. `activity_file_list.xml`](#13-activity_file_listxml)
     - [ヘッダー部分](#ヘッダー部分-2)
     - [動画ボタン部分](#動画ボタン部分-1)
     - [設定画面表示コンテナ](#設定画面表示コンテナ)
@@ -104,7 +120,7 @@
 
 # ソースコードの概要説明
 
-今回の成果物となるソースコードは、大きく8つです。各ファイルの詳細を以下に示します。ファイル名の後に、Android Studio内でどこのディレクトリに保存されているかを記載しています。
+今回の成果物となるソースコードは、大きく12つです。各ファイルの詳細を以下に示します。ファイル名の後に、Android Studio内でどこのディレクトリに保存されているかを記載しています。
 
 ### 1. `index.html`(Webページ用)
 
@@ -112,7 +128,7 @@
 
 ### 2. `activity_main.xml`(src/main/res/layout)
 
-このXMLファイルはアプリケーションのメイン画面のレイアウトを定義しています。WebView、ヘッダー(戻るボタンとカテゴリ名)、動画名、ファイルビューア、設定の各部分がレイアウトに含まれています。
+このXMLファイルはアプリケーションのメイン画面のレイアウトを定義しています。ヘッダー(戻るボタンとカテゴリ名)、動画名、設定の各部分がレイアウトに含まれています。
 
 ### 3. `bottom_nav_menu_main.xmlとbottom_nav_menu_file_list.xml`(src/main/res/menu)
 
@@ -124,12 +140,11 @@
 
 ### 5. `MainActivity.java`(src/main/java/com/example/app)
 
-このJavaファイルはアプリケーションのメインアクティビティを定義しています。ここではDeepLinkからのパラメータを取得し、対応するURLをWebViewにロードします。また、アプリがバックグラウンドに移行してから10分後にアプリを自動的に終了する機能も実装されています。
+このJavaファイルはアプリケーションのメインアクティビティを定義しています。ここではBottomNavigationViewを用いて`FileViewerFragment`や`SettingsFragment`への遷移を制御しています。また、アプリがバックグラウンドに移行してから10分後にアプリを自動的に終了する機能も実装されています。
 
 ### 6. `SettingsFragment.java`(src/main/java/com/example/app)
 
 アプリの設定画面を表示するフラグメントのJavaファイル。レイアウトは`fragment_settings.xml`によって定義されています。
-
 
 ### 7. `AndroidManifest.xml`(src/main/res)
 
@@ -143,11 +158,15 @@
 
 このJavaファイルは、アプリケーション内でファイルのリストを表示するアクティビティを定義しています。このアクティビティは、ユーザーが利用可能なファイルやフォルダを一覧表示し、選択することで詳細を閲覧できるように設計されています。
 
-### 10. `SettingsFragment.java`(src/main/java/com/example/app)
+### 10. `FileViewerFragment.java`(src/main/java/com/example/app)
 
-`SettingsFragment.java`は、アプリケーションの設定を表示および編集するためのフラグメントを定義しています。このフラグメントは、ユーザーがアプリケーションの振る舞いや表示をカスタマイズするためのオプションを提供します。
+`FileViewerFragment.java`は、WebViewを利用して特定のURLを表示するフラグメントを定義しています。DeepLinkからのパラメータを取得し、対応するURLをWebViewにロードします。
 
-### 11. `activity_file_list.xml`(src/main/res/layout)
+### 11. `UrlMappingHelper.java`(src/main/java/com/example/app)
+
+このJavaファイルは、DeepLinkのパラメータとそれに対応するURLをマッピングするヘルパークラスです。特定のキーに対応するURLを返す`getUrl`メソッドが実装されています。
+
+### 12. `activity_file_list.xml`(src/main/res/layout)
 
 このXMLファイルは、`FileListActivity.java`で使用されるレイアウトを定義しています。ヘッダー部分、動画ボタン部分、設定画面を表示するためのコンテナ、およびボトムナビゲーション部分を含んでいます。各部分は、ユーザーがファイルやフォルダを効率的に閲覧・選択できるようにデザインされています。
 
@@ -432,20 +451,14 @@ package com.example.app;
 ### インポート宣言
 
 ```java
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import java.util.HashMap;
-import java.util.Map;
+import android.net.Uri;
 ```
 
 以下の部分は、このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。
@@ -487,44 +500,17 @@ setContentView(R.layout.activity_main);
 
 上記のコードで、親クラスの`onCreate`メソッドを呼び出し、UIのレイアウトを設定しています。
 
-#### 5.2. WebViewの設定
+#### 5.2. アクションバーの非表示設定
 
 ```java
-WebView webView = findViewById(R.id.webview);
-WebSettings webSettings = webView.getSettings();
-webSettings.setJavaScriptEnabled(true);
+if (getSupportActionBar() != null) {
+    getSupportActionBar().hide();
+}
 ```
 
-上記のコードで、`WebView`のインスタンスを取得し、JavaScriptを有効にしています。
+アプリケーションのアクションバーを非表示にしています。
 
-#### 5.3. カテゴリと動画名の表示部分の初期化
-
-```java
-TextView categoryTextView = findViewById(R.id.fileViewer);
-TextView videoNameTextView = findViewById(R.id.parameter);
-```
-
-この部分で、`TextView`のインスタンスを取得しています。
-
-#### 5.4. Intentからのデータ取得
-
-```java
-Intent intent = getIntent();
-String action = intent.getAction();
-Uri data = intent.getData();
-```
-
-この部分で、アクティビティが開始されたときの`Intent`からデータを取得しています。
-
-#### 5.5. ボトムナビゲーションの初期化
-
-```java
-BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-```
-
-ボトムナビゲーションのインスタンスを取得しています。
-
-#### 5.6. シャットダウンの準備
+#### 5.3. シャットダウンの準備
 
 ```java
 handler = new Handler();
@@ -538,28 +524,40 @@ shutdownRunnable = new Runnable() {
 
 アプリがバックグラウンドに移行した後のシャットダウンのための準備をしています。
 
-#### 5.7. ヘッダー部分の設定
+#### 5.4. ボトムナビゲーションの初期化とイベントリスナー
 
 ```java
-LinearLayout header = findViewById(R.id.header);
-header.setBackgroundColor(Color.parseColor("#FF5733"));
-```
-
-ヘッダー部分の背景色を設定しています。
-
-#### 5.8. ボトムナビゲーションのイベントリスナー
-
-```java
+BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
 bottomNav.setOnNavigationItemSelectedListener(item -> {
     ...
 });
 ```
 
-ボトムナビゲーションの各アイテムが選択されたときの動作を定義しています。
+ボトムナビゲーションのインスタンスを取得し、各アイテムが選択されたときの動作を定義しています。
+
+#### 5.5. 画面の向きに応じてビューの調整
+
+```java
+adjustViewsForOrientation(getResources().getConfiguration().orientation);
+```
+
+画面の向きに応じてビューの表示を調整するメソッドを呼び出しています。
 
 ### アクティビティのライフサイクルメソッド
 
-#### 5.10. `onPause()`
+#### 5.6. `onConfigurationChanged`
+
+```java
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    adjustViewsForOrientation(newConfig.orientation);
+}
+```
+
+デバイスの画面の向きが変わったときに呼ばれるメソッドです。画面の向きに応じてビューを調整します。
+
+#### 5.7. `onPause()`
 
 ```java
 @Override
@@ -571,7 +569,7 @@ protected void onPause() {
 
 アクティビティがバックグラウンドに移動するときに呼ばれるメソッドです。
 
-#### 5.11. `onResume()`
+#### 5.8. `onResume()`
 
 ```java
 @Override
@@ -584,6 +582,7 @@ protected void onResume() {
 アクティビティがフォアグラウンドに戻るときに呼ばれるメソッドです。
 
 <div style="page-break-after: always;"></div>
+---
 
 ## 6. `SettingsFragment`
 ---
@@ -918,7 +917,124 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 <div style="page-break-after: always;"></div>
 
 
-## 11. `activity_file_list.xml`
+## 11. `FileViewerFragment.java`
+---
+
+### パッケージ宣言
+
+```java
+package com.example.app;
+```
+
+この行は、このJavaクラスが所属するパッケージを宣言しています。このパッケージ内には、`FileViewerFragment`をはじめとする様々なクラスやリソースが含まれる可能性があります。
+
+### インポート宣言
+
+各種ライブラリやフレームワークのクラスを利用するためのインポート文です。
+
+### クラス宣言
+
+```java
+public class FileViewerFragment extends Fragment {
+```
+
+この行は、`FileViewerFragment`という名前の新しいクラスを宣言しています。このクラスはAndroidの`Fragment`を拡張しています。
+
+### `onCreateView`メソッド
+
+```java
+@Nullable
+@Override
+public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    ...
+}
+```
+
+このメソッドは、フラグメントのUIを生成するためにシステムによって呼び出されます。ここでは、`fragment_file_viewer`というレイアウトリソースをインフレートしています。
+
+### `onViewCreated`メソッド
+
+このメソッドは、フラグメントのビューが作成された後にシステムによって呼び出されます。ここでの主な処理は、WebViewの設定やIntentからのデータ取得、ボタンのクリックリスナー設定などです。
+
+### `onConfigurationChanged`メソッド
+
+```java
+@Override
+public void onConfigurationChanged(@NonNull Configuration newConfig) {
+    ...
+}
+```
+
+デバイスの設定（例：画面の向き）が変更されたときに呼ばれるメソッドです。このメソッド内で、画面の向きに応じてビューの表示を調整する`adjustViewsForOrientation`メソッドを呼び出しています。
+
+### `adjustViewsForOrientation`メソッド
+
+このプライベートメソッドは、画面の向きに応じてビューの表示を調整するためのものです。例えば、画面がランドスケープモードの場合、一部のビューを非表示にしたり、逆にポートレートモードの場合は表示したりしています。
+
+<div style="page-break-after: always;"></div>
+
+## 12. `UrlMappingHelper.java`
+---
+
+### パッケージ宣言
+
+```java
+package com.example.app;
+```
+
+この行は、このJavaクラスが所属するパッケージを宣言しています。
+
+### インポート宣言
+
+このクラスで使用する外部のクラスやインターフェースをインポートするための宣言です。ここでは、`HashMap`や`Map`をインポートしています。
+
+### クラス宣言
+
+```java
+public class UrlMappingHelper {
+```
+
+この行は、`UrlMappingHelper`という名前の新しいクラスを宣言しています。このクラスはDeepLinkのパラメータから対応するURLを取得するためのヘルパークラスとして機能します。
+
+### インスタンス変数
+
+```java
+private static final Map<String, String> URL_MAP = new HashMap<>();
+```
+
+この行は、DeepLinkのパラメータと対応するURLをマッピングするための静的なマップを宣言しています。
+
+### 静的初期化ブロック
+
+```java
+static {
+    ...
+}
+```
+
+この部分は、静的初期化ブロックとして、クラスがロードされるときに一度だけ実行されるコードブロックです。ここでは、`URL_MAP`にパラメータと対応するURLのマッピングを追加しています。
+
+### プライベートコンストラクタ
+
+```java
+private UrlMappingHelper() {}
+```
+
+この行は、このクラスのインスタンス化を防ぐためのプライベートコンストラクタを宣言しています。
+
+### `getUrl`メソッド
+
+```java
+public static String getUrl(String key) {
+    ...
+}
+```
+
+このメソッドは、指定されたキーに対応するURLを`URL_MAP`から取得して返します。
+
+<div style="page-break-after: always;"></div>
+
+## 13. `activity_file_list.xml`
 ---
 
 このレイアウトは、アプリケーション内で利用可能な動画のリストを表示する画面の基盤となるレイアウトです。
